@@ -1,0 +1,45 @@
+/* Стиль для всего заголовка главы */
+.chapter-heading {
+    text-align: center;
+    font-family: 'Times New Roman', serif;
+    font-size: 14pt;
+    line-height: 107%;
+    color: black;
+    margin: 20px 0;
+}
+
+/* Стиль для якоря (невидимый, но функциональный) */
+.chapter-anchor {
+    text-decoration: none;
+    color: inherit;
+    display: inline-block;
+}
+
+/* Стиль для номера главы */
+.chapter-number {
+    font-family: 'Times New Roman', serif;
+    font-size: 14pt;
+    line-height: 107%;
+    font-weight: normal
+}
+
+/* Стиль для названия главы */
+.chapter-title {
+    font-family: 'Times New Roman', serif;
+    font-size: 14pt;
+    line-height: 107%;
+    color: black;
+    font-weight: normal
+}
+.mso-normal {
+    font-family: 'Times New Roman', serif;
+    font-size: 14pt;
+    color: black;
+    line-height: 1.5;
+    text-indent: 1.25cm;
+}
+.text-content {
+    line-height: 1.5;
+    display: inline-block;
+    width: 100%;
+}
