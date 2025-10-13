@@ -14,6 +14,8 @@ let Hnijt;
 let U;
 let Nb0;
 let Nb1;
+let qb0;
+let qb1;
 
 let formulaHtrResult;
 let formulaHnijtResult;
@@ -95,15 +97,29 @@ for (let elem = 0; elem < inputs.length; elem++){
             }
 
             if (numBuildings && numSections && numFloors && numApartments && population) {
-                U = parseInt(numBuildings) + parseInt(numSections) + parseInt(numFloors) + parseInt(numApartments) + parseInt(population);
+                U = parseFloat(numBuildings) + parseFloat(numSections) + parseFloat(numFloors) + parseFloat(numApartments) + parseFloat(population);
+                qb0 = 250*U/1000;
+                qb0 = Math.ceil(qb0)
+                qb1 = 165*U/1000;
+                qb1 = Math.ceil(qb1)
+                U = Math.ceil(U)
+
                 let uCalculate = numBuildings + " + " + numSections + " + " + numFloors + " + " + numApartments + " + " + population + " = " + U.toString();
                 allValue('[u-calculate]', uCalculate)
                 allValue('[u]', U.toString() + " чел")
+                allValue('[u-3]', U.toString() + " чел. (количество водопотребителей в жилом доме)")
+
+                let qb0Calculate = "250 * " + U + " /1000" + " = " + qb0.toString();
+                allValue('[qb0-calculate]', qb0Calculate)
+                let qb1Calculate = "165 * " + U + " /1000" + " = " + qb1.toString();
+                allValue('[qb1-calculate]', qb1Calculate)
             }
 
             if (numSections && numFloors && numDevices && numApartments) {
-                Nb0 = parseInt(numSections) + parseInt(numFloors) + parseInt(numDevices) + parseInt(numApartments);
-                Nb1 = parseInt(numSections) + parseInt(numFloors) + parseInt(numDevices) + parseInt(numApartments);
+                Nb0 = parseFloat(numSections) + parseFloat(numFloors) + parseFloat(numDevices) + parseFloat(numApartments);
+                Nb0 = Math.ceil(Nb0)
+                Nb1 = parseFloat(numSections) + parseFloat(numFloors) + parseFloat(numDevices) + parseFloat(numApartments);
+                Nb1 = Math.ceil(Nb1)
                 let Nb0Calculate = numSections + " + " + numFloors + " + " + numDevices + " + " + numApartments + " = " + Nb0.toString();
                 let Nb1Calculate = numSections + " + " + numFloors + " + " + numDevices + " + " + numApartments + " = " + Nb1.toString();
                 allValue('[Nb0-calculate]', Nb0Calculate + " шт")
