@@ -16,31 +16,25 @@ let Nb0;
 let Nb1;
 let qb0;
 let qb1;
-let Pb0;
-let Pb1;
+let Psb0;
+let Psb1;
 let NP0;
 let NP1;
 let a1;
 let a2;
 let qb0s;
 let qb1s;
+let NP3;
+let NP4;
+let a3;
+let a4;
+let Phb0;
+let Phb1;
+let qb0h;
+let qb1h;
 
 let formulaHtrResult;
 let formulaHnijtResult;
-let formulaResult1;
-let formulaResult2;
-let formulaResult3;
-let formulaResult4;
-let formulaResult5;
-let formulaResult6;
-let formulaResult7;
-let formulaResult8;
-let formulaResult9;
-let formulaResult10;
-let formulaResult11;
-let formulaResult12;
-let formulaResult13;
-let formulaResult14;
 let hiddenFormulaCont;
 let formulaCont;
 let canvasCont;
@@ -121,14 +115,14 @@ for (let elem = 0; elem < inputs.length; elem++){
                 let qb1Calculate = "165 * " + U + " /1000" + " = " + qb1.toString();
                 allValue('[qb1-calculate]', qb1Calculate);
 
-                Pb0 = (15.6*U)/(3600*320*0.3);
-                Pb0 = Number(Pb0.toFixed(6));
-                let Pb0Calculate = "(15.6 * " + U + ")/(3600*320*0.3) = " + Pb0;
+                Psb0 = (15.6*U)/(3600*320*0.3);
+                Psb0 = Number(Psb0.toFixed(6));
+                let Pb0Calculate = "(15.6 * " + U + ")/(3600*320*0.3) = " + Psb0;
                 allValue('[Pb0-calculate]', Pb0Calculate);
 
-                Pb1 = (7.1*U)/(3600*320*0.2);
-                Pb1 = Number(Pb1.toFixed(6));
-                let Pb1Calculate = "(7.1 * " + U + ")/(3600*320*0.2) = " + Pb1;
+                Psb1 = (7.1*U)/(3600*320*0.2);
+                Psb1 = Number(Psb1.toFixed(6));
+                let Pb1Calculate = "(7.1 * " + U + ")/(3600*320*0.2) = " + Psb1;
                 allValue('[Pb1-calculate]', Pb0Calculate);
             }
 
@@ -143,9 +137,9 @@ for (let elem = 0; elem < inputs.length; elem++){
                 allValue('[Nb1-calculate]', Nb1Calculate + " шт")
             }
 
-            if (Nb0 && Pb0) {
+            if (Nb0 && Psb0) {
                 //NP0 = Number((Nb0 * Number(Pb0.toFixed(1))).toFixed(3));
-                NP0 = Number((Nb0 * Pb0).toFixed(3));
+                NP0 = Number((Nb0 * Psb0).toFixed(3));
                 allValue('[NP0-calculate]', NP0)
             }
 
@@ -157,8 +151,8 @@ for (let elem = 0; elem < inputs.length; elem++){
                 allValue('[qb0s-calculate]', qb0sCalculate);
             }
 
-            if (Nb1 && Pb1) {
-                NP1 = Number((Nb1 * Pb1).toFixed(3));
+            if (Nb1 && Psb1) {
+                NP1 = Number((Nb1 * Psb1).toFixed(3));
                 allValue('[NP1-calculate]', NP1)
             }
 
@@ -170,6 +164,45 @@ for (let elem = 0; elem < inputs.length; elem++){
                 allValue('[qb1s-calculate]', qb1sCalculate);
             }
 
+            if (Psb0) {
+                Phb0 = (3600*0.3*Psb0)/300;
+                Phb0 = Number(Phb0.toFixed(6));
+                let Pb0Calculate = "(3600 * 0.3 * " + Psb0 + ")/300 = " + Phb0;
+                allValue('[Phb0-calculate]', Pb0Calculate);
+            }
+
+            if (Phb0 && Nb0) {
+                NP3 = Number((Nb0 * Phb0).toFixed(3));
+                allValue('[NP3-calculate]', NP3)
+            }
+
+            if (NP3) {
+                let a = findAlphaByNP(NP3);
+                allValue('[a3-calculate]', a);
+                qb0h = Number((0.005*parseFloat(a)*300).toFixed(4));
+                let qb0hCalculate = "0.005 * " + a + " * 300 = " + qb0h + " м3/час";
+                allValue('[qb0h-calculate]', qb0hCalculate);
+            }
+
+            if (Psb1) {
+                Phb1 = (3600*0.2*Psb1)/200;
+                Phb1 = Number(Phb1.toFixed(6));
+                let Pb1Calculate = "(3600 * 0.2 * " + Psb1 + ")/200 = " + Phb1;
+                allValue('[Phb1-calculate]', Pb1Calculate);
+            }
+
+            if (Phb1 && Nb1) {
+                NP4 = Number((Nb1 * Phb1).toFixed(3));
+                allValue('[NP4-calculate]', NP4)
+            }
+
+            if (NP4) {
+                let a = findAlphaByNP(NP4);
+                allValue('[a4-calculate]', a);
+                qb1h = Number((0.005*parseFloat(a)*300).toFixed(4));
+                let qb1hCalculate = "0.005 * " + a + " * 200 = " + qb1h + " м3/час";
+                allValue('[qb1h-calculate]', qb1hCalculate);
+            }
         }
     });
 }
