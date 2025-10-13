@@ -19,6 +19,8 @@ let qb1;
 let Pb0;
 let NP0;
 let NP1;
+let a1;
+let a2;
 
 let formulaHtrResult;
 let formulaHnijtResult;
@@ -138,6 +140,11 @@ for (let elem = 0; elem < inputs.length; elem++){
                 NP0 = Number((Nb0 * Pb0).toFixed(3));
                 allValue('[NP0-calculate]', NP0)
             }
+
+            if (NP0) {
+                console.log(findAlphaByNP(NP0))
+                allValue('[a1-calculate]', findAlphaByNP(NP0));
+            }
         }
     });
 }
@@ -197,16 +204,16 @@ function findAlphaByNP(npValue) {
         return 0.200;
     }
     if (npValue >= 0.015 && npValue < 0.200) {
-        return interpolation(Number(npValue.toFixed(3)), 3);
+        return interpolation(npValue, 3);
     }
     if (npValue >= 0.20 && npValue < 2.00) {
-        return interpolation(Number(npValue.toFixed(2)), 3);
+        return interpolation(npValue, 3);
     }
     if (npValue >= 2.0 && npValue < 50.0) {
-        return interpolation(Number(npValue.toFixed(1)), 3);
+        return interpolation(npValue, 3);
     }
     if (npValue >= 50.0 && npValue <= 755.0) {
-        return interpolation(Number(npValue.toFixed(0)), 2);
+        return interpolation(npValue, 2);
     }
 
     function interpolation(x, num) {
@@ -217,8 +224,7 @@ function findAlphaByNP(npValue) {
             const y2 = npToAlphaTable[i + 1].alpha;
 
             if (x >= x1 && x <= x2) {
-                let result = y1 + ((x - x1) * (y2 - y1)) / (x2 - x1);
-                return Number(result.toFixed(num));
+                return y1 + ((x - x1) * (y2 - y1)) / (x2 - x1);
             }
         }
     }
