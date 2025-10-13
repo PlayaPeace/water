@@ -17,6 +17,8 @@ let Nb1;
 let qb0;
 let qb1;
 let Pb0;
+let NP0;
+let NP1;
 
 let formulaHtrResult;
 let formulaHnijtResult;
@@ -115,20 +117,26 @@ for (let elem = 0; elem < inputs.length; elem++){
                 allValue('[qb1-calculate]', qb1Calculate);
 
                 Pb0 = (15.6*U)/(3600*320*0.3);
-                Pb0 = Number(Pb0.toFixed(6))
+                Pb0 = Number(Pb0.toFixed(6));
                 let Pb0Calculate = "(15.6 * " + U + ")/(3600*320*0.3) = " + Pb0;
                 allValue('[Pb0-calculate]', Pb0Calculate);
             }
 
             if (numSections && numFloors && numDevices && numApartments) {
-                Nb0 = parseFloat(numSections) + parseFloat(numFloors) + parseFloat(numDevices) + parseFloat(numApartments);
+                Nb0 = parseFloat(numSections) * parseFloat(numFloors) * parseFloat(numDevices) * parseFloat(numApartments);
                 Nb0 = Math.ceil(Nb0)
-                Nb1 = parseFloat(numSections) + parseFloat(numFloors) + parseFloat(numDevices) + parseFloat(numApartments);
+                Nb1 = parseFloat(numSections) * parseFloat(numFloors) * parseFloat(numDevices) * parseFloat(numApartments);
                 Nb1 = Math.ceil(Nb1)
-                let Nb0Calculate = numSections + " + " + numFloors + " + " + numDevices + " + " + numApartments + " = " + Nb0.toString();
-                let Nb1Calculate = numSections + " + " + numFloors + " + " + numDevices + " + " + numApartments + " = " + Nb1.toString();
+                let Nb0Calculate = numSections + " * " + numFloors + " * " + numDevices + " * " + numApartments + " = " + Nb0.toString();
+                let Nb1Calculate = numSections + " * " + numFloors + " * " + numDevices + " * " + numApartments + " = " + Nb1.toString();
                 allValue('[Nb0-calculate]', Nb0Calculate + " шт")
                 allValue('[Nb1-calculate]', Nb1Calculate + " шт")
+            }
+
+            if (Nb0 && Pb0) {
+                //NP0 = Number((Nb0 * Number(Pb0.toFixed(1))).toFixed(3));
+                NP0 = Number((Nb0 * Pb0).toFixed(3));
+                allValue('[NP0-calculate]', NP0)
             }
         }
     });
@@ -182,3 +190,229 @@ function calculate(formulaResult, hiddenFormulaCont, formulaCont, canvasCont) {
         }
     }).catch(err => console.error(err));
 }
+
+
+function findAlphaByNP(npValue) {
+    if (npValue < 0.015) {
+        return 0.200;
+    }
+    if (npValue >= 0.015 && npValue < 0.200) {
+        return interpolation(Number(npValue.toFixed(3)), 3);
+    }
+    if (npValue >= 0.20 && npValue < 2.00) {
+        return interpolation(Number(npValue.toFixed(2)), 3);
+    }
+    if (npValue >= 2.0 && npValue < 50.0) {
+        return interpolation(Number(npValue.toFixed(1)), 3);
+    }
+    if (npValue >= 50.0 && npValue <= 755.0) {
+        return interpolation(Number(npValue.toFixed(0)), 2);
+    }
+
+    function interpolation(x, num) {
+        for (let i = 0; i < npToAlphaTable.length - 1; i++) {
+            const x1 = npToAlphaTable[i].np;
+            const x2 = npToAlphaTable[i + 1].np;
+            const y1 = npToAlphaTable[i].alpha;
+            const y2 = npToAlphaTable[i + 1].alpha;
+
+            if (x >= x1 && x <= x2) {
+                let result = y1 + ((x - x1) * (y2 - y1)) / (x2 - x1);
+                return Number(result.toFixed(num));
+            }
+        }
+    }
+}
+
+const npToAlphaTable = [
+    // Первая часть (0.000 - 0.050)
+    { np: 0.000, alpha: 0.200 }, // Менее 0,015
+    { np: 0.015, alpha: 0.202 }, { np: 0.016, alpha: 0.205 }, { np: 0.017, alpha: 0.207 },
+    { np: 0.018, alpha: 0.210 }, { np: 0.019, alpha: 0.212 }, { np: 0.020, alpha: 0.215 },
+    { np: 0.021, alpha: 0.217 }, { np: 0.022, alpha: 0.219 }, { np: 0.023, alpha: 0.222 },
+    { np: 0.024, alpha: 0.224 }, { np: 0.025, alpha: 0.226 }, { np: 0.026, alpha: 0.228 },
+    { np: 0.027, alpha: 0.230 }, { np: 0.028, alpha: 0.233 }, { np: 0.029, alpha: 0.235 },
+    { np: 0.030, alpha: 0.237 }, { np: 0.031, alpha: 0.239 }, { np: 0.032, alpha: 0.241 },
+    { np: 0.033, alpha: 0.243 }, { np: 0.034, alpha: 0.245 }, { np: 0.035, alpha: 0.247 },
+    { np: 0.036, alpha: 0.249 }, { np: 0.037, alpha: 0.250 }, { np: 0.038, alpha: 0.252 },
+    { np: 0.039, alpha: 0.254 }, { np: 0.040, alpha: 0.256 }, { np: 0.041, alpha: 0.258 },
+    { np: 0.042, alpha: 0.259 }, { np: 0.043, alpha: 0.261 }, { np: 0.044, alpha: 0.263 },
+    { np: 0.045, alpha: 0.265 }, { np: 0.046, alpha: 0.266 }, { np: 0.047, alpha: 0.268 },
+    { np: 0.048, alpha: 0.270 }, { np: 0.049, alpha: 0.271 }, { np: 0.050, alpha: 0.273 },
+
+    // Вторая часть (0.052 - 1.60)
+    { np: 0.052, alpha: 0.276 }, { np: 0.054, alpha: 0.280 }, { np: 0.056, alpha: 0.283 },
+    { np: 0.058, alpha: 0.286 }, { np: 0.060, alpha: 0.289 }, { np: 0.062, alpha: 0.292 },
+    { np: 0.064, alpha: 0.295 }, { np: 0.065, alpha: 0.298 }, { np: 0.068, alpha: 0.301 },
+    { np: 0.070, alpha: 0.304 }, { np: 0.072, alpha: 0.307 }, { np: 0.074, alpha: 0.309 },
+    { np: 0.076, alpha: 0.312 }, { np: 0.078, alpha: 0.315 }, { np: 0.080, alpha: 0.318 },
+    { np: 0.082, alpha: 0.320 }, { np: 0.084, alpha: 0.323 }, { np: 0.086, alpha: 0.326 },
+    { np: 0.088, alpha: 0.328 }, { np: 0.090, alpha: 0.331 }, { np: 0.092, alpha: 0.333 },
+    { np: 0.094, alpha: 0.336 }, { np: 0.096, alpha: 0.338 }, { np: 0.098, alpha: 0.341 },
+    { np: 0.100, alpha: 0.343 }, { np: 0.105, alpha: 0.349 }, { np: 0.110, alpha: 0.355 },
+    { np: 0.115, alpha: 0.361 }, { np: 0.120, alpha: 0.367 }, { np: 0.125, alpha: 0.373 },
+    { np: 0.130, alpha: 0.378 }, { np: 0.135, alpha: 0.384 }, { np: 0.140, alpha: 0.389 },
+    { np: 0.145, alpha: 0.394 }, { np: 0.150, alpha: 0.399 }, { np: 0.155, alpha: 0.405 },
+    { np: 0.160, alpha: 0.410 }, { np: 0.165, alpha: 0.415 }, { np: 0.170, alpha: 0.420 },
+    { np: 0.175, alpha: 0.425 }, { np: 0.180, alpha: 0.430 }, { np: 0.185, alpha: 0.435 },
+    { np: 0.190, alpha: 0.439 }, { np: 0.195, alpha: 0.444 }, { np: 0.200, alpha: 0.449 },
+    { np: 0.210, alpha: 0.458 }, { np: 0.220, alpha: 0.467 }, { np: 0.230, alpha: 0.476 },
+    { np: 0.240, alpha: 0.485 }, { np: 0.250, alpha: 0.493 }, { np: 0.260, alpha: 0.502 },
+    { np: 0.270, alpha: 0.510 }, { np: 0.280, alpha: 0.518 }, { np: 0.290, alpha: 0.526 },
+    { np: 0.300, alpha: 0.534 }, { np: 0.310, alpha: 0.542 }, { np: 0.320, alpha: 0.550 },
+    { np: 0.330, alpha: 0.558 }, { np: 0.340, alpha: 0.565 }, { np: 0.350, alpha: 0.573 },
+    { np: 0.360, alpha: 0.580 }, { np: 0.370, alpha: 0.588 }, { np: 0.380, alpha: 0.595 },
+    { np: 0.390, alpha: 0.602 }, { np: 0.400, alpha: 0.610 }, { np: 0.410, alpha: 0.617 },
+    { np: 0.420, alpha: 0.624 }, { np: 0.430, alpha: 0.631 }, { np: 0.440, alpha: 0.638 },
+    { np: 0.450, alpha: 0.645 }, { np: 0.460, alpha: 0.652 }, { np: 0.470, alpha: 0.658 },
+    { np: 0.480, alpha: 0.665 }, { np: 0.490, alpha: 0.672 }, { np: 0.500, alpha: 0.678 },
+    { np: 0.520, alpha: 0.692 }, { np: 0.540, alpha: 0.704 }, { np: 0.560, alpha: 0.717 },
+    { np: 0.580, alpha: 0.730 }, { np: 0.600, alpha: 0.742 }, { np: 0.620, alpha: 0.755 },
+    { np: 0.640, alpha: 0.767 }, { np: 0.660, alpha: 0.779 }, { np: 0.680, alpha: 0.791 },
+    { np: 0.700, alpha: 0.803 }, { np: 0.720, alpha: 0.815 }, { np: 0.740, alpha: 0.826 },
+    { np: 0.760, alpha: 0.838 }, { np: 0.780, alpha: 0.849 }, { np: 0.800, alpha: 0.860 },
+    { np: 0.820, alpha: 0.872 }, { np: 0.840, alpha: 0.883 }, { np: 0.860, alpha: 0.894 },
+    { np: 0.880, alpha: 0.905 }, { np: 0.900, alpha: 0.916 }, { np: 0.920, alpha: 0.927 },
+    { np: 0.940, alpha: 0.937 }, { np: 0.960, alpha: 0.948 }, { np: 0.980, alpha: 0.959 },
+    { np: 1.000, alpha: 0.969 }, { np: 1.050, alpha: 0.995 }, { np: 1.100, alpha: 1.021 },
+    { np: 1.150, alpha: 1.046 }, { np: 1.200, alpha: 1.071 }, { np: 1.250, alpha: 1.096 },
+    { np: 1.300, alpha: 1.120 }, { np: 1.350, alpha: 1.144 }, { np: 1.400, alpha: 1.168 },
+    { np: 1.450, alpha: 1.191 }, { np: 1.500, alpha: 1.215 }, { np: 1.550, alpha: 1.238 },
+    { np: 1.600, alpha: 1.261 },
+
+    // Третья часть (1.65 - 8.6)
+    { np: 1.650, alpha: 1.283 }, { np: 1.700, alpha: 1.306 }, { np: 1.750, alpha: 1.328 },
+    { np: 1.800, alpha: 1.350 }, { np: 1.850, alpha: 1.372 }, { np: 1.900, alpha: 1.394 },
+    { np: 1.950, alpha: 1.416 }, { np: 2.000, alpha: 1.437 }, { np: 2.100, alpha: 1.479 },
+    { np: 2.200, alpha: 1.521 }, { np: 2.300, alpha: 1.563 }, { np: 2.400, alpha: 1.604 },
+    { np: 2.500, alpha: 1.644 }, { np: 2.600, alpha: 1.684 }, { np: 2.700, alpha: 1.724 },
+    { np: 2.800, alpha: 1.763 }, { np: 2.900, alpha: 1.802 }, { np: 3.000, alpha: 1.840 },
+    { np: 3.100, alpha: 1.879 }, { np: 3.200, alpha: 1.917 }, { np: 3.300, alpha: 1.954 },
+    { np: 3.400, alpha: 1.991 }, { np: 3.500, alpha: 2.029 }, { np: 3.600, alpha: 2.065 },
+    { np: 3.700, alpha: 2.102 }, { np: 3.800, alpha: 2.138 }, { np: 3.900, alpha: 2.174 },
+    { np: 4.000, alpha: 2.210 }, { np: 4.100, alpha: 2.246 }, { np: 4.200, alpha: 2.281 },
+    { np: 4.300, alpha: 2.317 }, { np: 4.400, alpha: 2.352 }, { np: 4.500, alpha: 2.386 },
+    { np: 4.600, alpha: 2.421 }, { np: 4.700, alpha: 2.456 }, { np: 4.800, alpha: 2.490 },
+    { np: 4.900, alpha: 2.524 }, { np: 5.000, alpha: 2.558 }, { np: 5.100, alpha: 2.592 },
+    { np: 5.200, alpha: 2.626 }, { np: 5.300, alpha: 2.660 }, { np: 5.400, alpha: 2.693 },
+    { np: 5.500, alpha: 2.726 }, { np: 5.600, alpha: 2.760 }, { np: 5.700, alpha: 2.793 },
+    { np: 5.800, alpha: 2.826 }, { np: 5.900, alpha: 2.858 }, { np: 6.000, alpha: 2.891 },
+    { np: 6.100, alpha: 2.924 }, { np: 6.200, alpha: 2.956 }, { np: 6.300, alpha: 2.989 },
+    { np: 6.400, alpha: 3.021 }, { np: 6.500, alpha: 3.053 }, { np: 6.600, alpha: 3.085 },
+    { np: 6.700, alpha: 3.117 }, { np: 6.800, alpha: 3.149 }, { np: 6.900, alpha: 3.181 },
+    { np: 7.000, alpha: 3.212 }, { np: 7.100, alpha: 3.244 }, { np: 7.200, alpha: 3.275 },
+    { np: 7.300, alpha: 3.307 }, { np: 7.400, alpha: 3.338 }, { np: 7.500, alpha: 3.369 },
+    { np: 7.600, alpha: 3.400 }, { np: 7.700, alpha: 3.431 }, { np: 7.800, alpha: 3.462 },
+    { np: 7.900, alpha: 3.493 }, { np: 8.000, alpha: 3.524 }, { np: 8.100, alpha: 3.555 },
+    { np: 8.200, alpha: 3.585 }, { np: 8.300, alpha: 3.616 }, { np: 8.400, alpha: 3.646 },
+    { np: 8.500, alpha: 3.677 }, { np: 8.600, alpha: 3.707 },
+
+    // Четвертая часть (8.7 - 80)
+    { np: 8.700, alpha: 3.738 }, { np: 8.800, alpha: 3.768 }, { np: 8.900, alpha: 3.798 },
+    { np: 9.000, alpha: 3.828 }, { np: 9.100, alpha: 3.858 }, { np: 9.200, alpha: 3.888 },
+    { np: 9.300, alpha: 3.918 }, { np: 9.400, alpha: 3.948 }, { np: 9.500, alpha: 3.978 },
+    { np: 9.600, alpha: 4.008 }, { np: 9.700, alpha: 4.037 }, { np: 9.800, alpha: 4.067 },
+    { np: 9.900, alpha: 4.097 }, { np: 10.000, alpha: 4.126 }, { np: 10.200, alpha: 4.185 },
+    { np: 10.400, alpha: 4.244 }, { np: 10.600, alpha: 4.302 }, { np: 10.800, alpha: 4.361 },
+    { np: 11.000, alpha: 4.419 }, { np: 11.200, alpha: 4.477 }, { np: 11.400, alpha: 4.534 },
+    { np: 11.600, alpha: 4.592 }, { np: 11.800, alpha: 4.649 }, { np: 12.000, alpha: 4.707 },
+    { np: 12.200, alpha: 4.764 }, { np: 12.400, alpha: 4.820 }, { np: 12.600, alpha: 4.877 },
+    { np: 12.800, alpha: 4.934 }, { np: 13.000, alpha: 4.990 }, { np: 13.200, alpha: 5.047 },
+    { np: 13.400, alpha: 5.103 }, { np: 13.600, alpha: 5.159 }, { np: 13.800, alpha: 5.215 },
+    { np: 14.000, alpha: 5.270 }, { np: 14.200, alpha: 5.326 }, { np: 14.400, alpha: 5.382 },
+    { np: 14.600, alpha: 5.437 }, { np: 14.800, alpha: 5.492 }, { np: 15.000, alpha: 5.547 },
+    { np: 15.200, alpha: 5.602 }, { np: 15.400, alpha: 5.657 }, { np: 15.600, alpha: 5.712 },
+    { np: 15.800, alpha: 5.767 }, { np: 16.000, alpha: 5.821 }, { np: 16.200, alpha: 5.876 },
+    { np: 16.400, alpha: 5.930 }, { np: 16.600, alpha: 5.984 }, { np: 16.800, alpha: 6.039 },
+    { np: 17.000, alpha: 6.093 }, { np: 17.200, alpha: 6.147 }, { np: 17.400, alpha: 6.201 },
+    { np: 17.600, alpha: 6.254 }, { np: 17.800, alpha: 6.308 }, { np: 18.000, alpha: 6.362 },
+    { np: 18.200, alpha: 6.415 }, { np: 18.400, alpha: 6.469 }, { np: 18.600, alpha: 6.522 },
+    { np: 18.800, alpha: 6.575 }, { np: 19.000, alpha: 6.629 }, { np: 19.200, alpha: 6.682 },
+    { np: 19.400, alpha: 6.734 }, { np: 19.600, alpha: 6.788 }, { np: 19.800, alpha: 6.840 },
+    { np: 20.000, alpha: 6.893 }, { np: 21.000, alpha: 7.156 }, { np: 21.500, alpha: 7.287 },
+    { np: 22.000, alpha: 7.417 }, { np: 22.500, alpha: 7.547 }, { np: 23.000, alpha: 7.677 },
+    { np: 23.500, alpha: 7.806 }, { np: 24.000, alpha: 7.935 }, { np: 24.500, alpha: 8.064 },
+    { np: 25.000, alpha: 8.192 }, { np: 25.500, alpha: 8.320 }, { np: 26.000, alpha: 8.447 },
+    { np: 26.500, alpha: 8.575 }, { np: 27.000, alpha: 8.701 }, { np: 27.500, alpha: 8.828 },
+    { np: 28.000, alpha: 8.955 }, { np: 28.500, alpha: 9.081 }, { np: 29.000, alpha: 9.207 },
+    { np: 29.500, alpha: 9.332 }, { np: 30.000, alpha: 9.457 }, { np: 30.500, alpha: 9.583 },
+    { np: 31.000, alpha: 9.707 }, { np: 31.500, alpha: 9.832 }, { np: 32.000, alpha: 9.957 },
+    { np: 32.500, alpha: 10.08 }, { np: 33.000, alpha: 10.20 }, { np: 33.500, alpha: 10.33 },
+    { np: 34.000, alpha: 10.45 }, { np: 34.500, alpha: 10.58 }, { np: 35.000, alpha: 10.70 },
+    { np: 35.500, alpha: 10.82 }, { np: 36.000, alpha: 10.94 }, { np: 36.500, alpha: 11.07 },
+    { np: 37.500, alpha: 11.31 }, { np: 38.000, alpha: 11.43 }, { np: 38.500, alpha: 11.56 },
+    { np: 39.000, alpha: 11.68 }, { np: 39.500, alpha: 11.80 }, { np: 40.000, alpha: 11.92 },
+    { np: 40.500, alpha: 12.04 }, { np: 41.000, alpha: 12.16 }, { np: 41.500, alpha: 12.28 },
+    { np: 42.000, alpha: 12.41 }, { np: 42.500, alpha: 12.53 }, { np: 43.000, alpha: 12.65 },
+    { np: 43.500, alpha: 12.77 }, { np: 44.000, alpha: 12.89 }, { np: 44.500, alpha: 13.01 },
+    { np: 45.000, alpha: 13.13 }, { np: 45.500, alpha: 13.25 }, { np: 46.000, alpha: 13.37 },
+    { np: 46.500, alpha: 13.49 }, { np: 47.000, alpha: 13.61 }, { np: 47.500, alpha: 13.73 },
+    { np: 48.000, alpha: 13.85 }, { np: 48.500, alpha: 13.97 }, { np: 49.000, alpha: 14.09 },
+    { np: 49.500, alpha: 14.20 }, { np: 50.000, alpha: 14.32 }, { np: 51.000, alpha: 14.56 },
+    { np: 52.000, alpha: 14.80 }, { np: 53.000, alpha: 15.04 }, { np: 54.000, alpha: 15.27 },
+    { np: 55.000, alpha: 15.51 }, { np: 56.000, alpha: 15.74 }, { np: 57.000, alpha: 15.98 },
+    { np: 58.000, alpha: 16.22 }, { np: 59.000, alpha: 16.45 }, { np: 60.000, alpha: 16.69 },
+    { np: 61.000, alpha: 16.92 }, { np: 62.000, alpha: 17.15 }, { np: 63.000, alpha: 17.39 },
+    { np: 64.000, alpha: 17.62 }, { np: 65.000, alpha: 17.85 }, { np: 66.000, alpha: 18.09 },
+    { np: 67.000, alpha: 18.32 }, { np: 68.000, alpha: 18.55 }, { np: 69.000, alpha: 18.79 },
+    { np: 70.000, alpha: 19.02 }, { np: 71.000, alpha: 19.25 }, { np: 72.000, alpha: 19.48 },
+    { np: 73.000, alpha: 19.71 }, { np: 74.000, alpha: 19.94 }, { np: 75.000, alpha: 20.18 },
+    { np: 76.000, alpha: 20.41 }, { np: 77.000, alpha: 20.64 }, { np: 78.000, alpha: 20.87 },
+    { np: 79.000, alpha: 21.10 }, { np: 80.000, alpha: 21.33 },
+
+    // Пятая часть (81 - 755)
+    { np: 81.000, alpha: 21.56 }, { np: 82.000, alpha: 21.69 }, { np: 83.000, alpha: 22.02 },
+    { np: 85.000, alpha: 22.48 }, { np: 86.000, alpha: 22.71 }, { np: 87.000, alpha: 22.94 },
+    { np: 88.000, alpha: 23.17 }, { np: 89.000, alpha: 23.39 }, { np: 90.000, alpha: 23.62 },
+    { np: 91.000, alpha: 23.85 }, { np: 92.000, alpha: 24.08 }, { np: 93.000, alpha: 24.31 },
+    { np: 94.000, alpha: 24.54 }, { np: 95.000, alpha: 24.77 }, { np: 96.000, alpha: 24.99 },
+    { np: 97.000, alpha: 25.22 }, { np: 98.000, alpha: 25.45 }, { np: 99.000, alpha: 25.68 },
+    { np: 100.000, alpha: 25.91 }, { np: 102.000, alpha: 26.36 }, { np: 104.000, alpha: 26.82 },
+    { np: 106.000, alpha: 27.27 }, { np: 108.000, alpha: 27.72 }, { np: 110.000, alpha: 28.18 },
+    { np: 112.000, alpha: 28.63 }, { np: 114.000, alpha: 29.09 }, { np: 116.000, alpha: 29.54 },
+    { np: 138.000, alpha: 34.51 }, { np: 140.000, alpha: 34.96 }, { np: 142.000, alpha: 35.41 },
+    { np: 144.000, alpha: 35.86 }, { np: 146.000, alpha: 36.31 }, { np: 148.000, alpha: 36.76 },
+    { np: 150.000, alpha: 37.21 }, { np: 152.000, alpha: 37.66 }, { np: 154.000, alpha: 38.11 },
+    { np: 158.000, alpha: 39.01 }, { np: 160.000, alpha: 39.46 }, { np: 162.000, alpha: 39.91 },
+    { np: 164.000, alpha: 40.35 }, { np: 166.000, alpha: 40.80 }, { np: 168.000, alpha: 41.25 },
+    { np: 170.000, alpha: 41.70 }, { np: 172.000, alpha: 42.15 }, { np: 174.000, alpha: 42.60 },
+    { np: 176.000, alpha: 43.05 }, { np: 178.000, alpha: 43.50 }, { np: 180.000, alpha: 43.95 },
+    { np: 182.000, alpha: 44.40 }, { np: 184.000, alpha: 44.84 }, { np: 186.000, alpha: 45.29 },
+    { np: 188.000, alpha: 45.74 }, { np: 190.000, alpha: 46.19 }, { np: 192.000, alpha: 46.64 },
+    { np: 235.000, alpha: 56.10 }, { np: 240.000, alpha: 57.19 }, { np: 245.000, alpha: 58.29 },
+    { np: 250.000, alpha: 59.38 }, { np: 255.000, alpha: 60.48 }, { np: 260.000, alpha: 61.57 },
+    { np: 265.000, alpha: 62.66 }, { np: 270.000, alpha: 63.75 }, { np: 275.000, alpha: 64.85 },
+    { np: 280.000, alpha: 65.94 }, { np: 285.000, alpha: 67.03 }, { np: 290.000, alpha: 68.12 },
+    { np: 295.000, alpha: 69.20 }, { np: 300.000, alpha: 70.29 }, { np: 305.000, alpha: 71.38 },
+    { np: 315.000, alpha: 73.55 }, { np: 320.000, alpha: 74.63 }, { np: 325.000, alpha: 75.72 },
+    { np: 330.000, alpha: 76.80 }, { np: 335.000, alpha: 77.88 }, { np: 340.000, alpha: 78.96 },
+    { np: 345.000, alpha: 80.04 }, { np: 350.000, alpha: 81.12 }, { np: 355.000, alpha: 82.20 },
+    { np: 360.000, alpha: 83.28 }, { np: 365.000, alpha: 84.36 }, { np: 370.000, alpha: 85.44 },
+    { np: 425.000, alpha: 97.27 }, { np: 430.000, alpha: 98.34 }, { np: 435.000, alpha: 99.41 },
+    { np: 440.000, alpha: 100.49 }, { np: 445.000, alpha: 101.56 }, { np: 450.000, alpha: 102.63 },
+    { np: 455.000, alpha: 103.70 }, { np: 460.000, alpha: 104.77 }, { np: 465.000, alpha: 105.84 },
+    { np: 470.000, alpha: 106.91 }, { np: 475.000, alpha: 107.98 }, { np: 480.000, alpha: 109.05 },
+    { np: 485.000, alpha: 110.11 }, { np: 490.000, alpha: 111.18 }, { np: 495.000, alpha: 112.25 },
+    { np: 500.000, alpha: 113.32 }, { np: 505.000, alpha: 114.38 }, { np: 510.000, alpha: 115.45 },
+    { np: 515.000, alpha: 116.52 }, { np: 520.000, alpha: 117.58 }, { np: 525.000, alpha: 118.65 },
+    { np: 535.000, alpha: 120.78 }, { np: 540.000, alpha: 121.84 }, { np: 545.000, alpha: 122.91 },
+    { np: 550.000, alpha: 123.97 }, { np: 555.000, alpha: 125.04 }, { np: 560.000, alpha: 126.10 },
+    { np: 615.000, alpha: 137.78 }, { np: 620.000, alpha: 138.84 }, { np: 625.000, alpha: 139.90 },
+    { np: 630.000, alpha: 140.96 }, { np: 635.000, alpha: 142.02 }, { np: 640.000, alpha: 143.08 },
+    { np: 645.000, alpha: 144.14 }, { np: 650.000, alpha: 145.20 }, { np: 655.000, alpha: 146.25 },
+    { np: 660.000, alpha: 147.31 }, { np: 665.000, alpha: 148.37 }, { np: 670.000, alpha: 149.43 },
+    { np: 675.000, alpha: 150.49 }, { np: 685.000, alpha: 152.60 }, { np: 690.000, alpha: 153.66 },
+    { np: 695.000, alpha: 154.72 }, { np: 700.000, alpha: 155.77 }, { np: 705.000, alpha: 156.83 },
+    { np: 710.000, alpha: 157.89 }, { np: 715.000, alpha: 158.94 }, { np: 720.000, alpha: 160.00 },
+    { np: 725.000, alpha: 161.06 }, { np: 730.000, alpha: 162.11 }, { np: 735.000, alpha: 163.17 },
+    { np: 740.000, alpha: 164.22 }, { np: 745.000, alpha: 165.28 }, { np: 755.000, alpha: 167.39 }
+];
+
+// for (let i = 0.000; i <= 0.195; i += 0.001) {
+//     let id = Number(i.toFixed(3));
+//     console.log(id, findAlphaByNP(id));
+// }
+// for (let i = 0; i <= 755; i += 1) {
+//     let id = Number(i.toFixed(3));
+//     console.log(id, findAlphaByNP(id));
+// }
