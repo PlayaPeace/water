@@ -12,6 +12,8 @@ let Htr;
 let Hnijt;
 
 let U;
+let Nb0;
+let Nb1;
 
 let formulaHtrResult;
 let formulaHnijtResult;
@@ -97,6 +99,15 @@ for (let elem = 0; elem < inputs.length; elem++){
                 let uCalculate = numBuildings + " + " + numSections + " + " + numFloors + " + " + numApartments + " + " + population + " = " + U.toString();
                 allValue('[u-calculate]', uCalculate)
                 allValue('[u]', U.toString() + " чел")
+            }
+
+            if (numSections && numFloors && numDevices && numApartments) {
+                Nb0 = parseInt(numSections) + parseInt(numFloors) + parseInt(numDevices) + parseInt(numApartments);
+                Nb1 = parseInt(numSections) + parseInt(numFloors) + parseInt(numDevices) + parseInt(numApartments);
+                let Nb0Calculate = numSections + " + " + numFloors + " + " + numDevices + " + " + numApartments + " = " + Nb0.toString();
+                let Nb1Calculate = numSections + " + " + numFloors + " + " + numDevices + " + " + numApartments + " = " + Nb1.toString();
+                allValue('[Nb0-calculate]', Nb0Calculate + " шт")
+                allValue('[Nb1-calculate]', Nb1Calculate + " шт")
             }
         }
     });
