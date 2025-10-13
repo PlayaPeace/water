@@ -4,6 +4,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Введение</title>
+    <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-svg.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/canvg/3.0.7/umd.min.js"></script>
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
@@ -181,6 +183,10 @@
         Для определения необходимости установки насосов, для повышения давления, определяем ориентировочный требуемый напор в системе:
     </span>
 </p>
+
+<div id="hiddenFormulaHtr"></div>
+<div id="formulaHtr" style="margin-top: 20px;">*формула*</div>
+<canvas id="canvasHtr" style="display: none;"></canvas>
 
 <p class="mso-normal">
     <span class="text-content">
@@ -817,6 +823,6 @@
         - Гидравлический расчет сетей водоснабжения проводим для расчетных схем без исключения каких-либо участков сети, стояков или оборудования.
     </span>
 </p>
-
+<script src="script.js"></script>
 </body>
 </html>
