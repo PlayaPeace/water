@@ -31,6 +31,27 @@
     color: black;
     font-weight: normal
 }
+
+.subchapter-heading {
+    text-align: left;
+    font-family: 'Times New Roman', serif;
+    font-size: 14pt;
+    margin: 15px 0 10px 20px;
+}
+
+/* Основной контейнер для выравнивания по центру страницы */
+.content-container {
+    max-width: 210mm; /* Ширина как у А4 */
+    margin: 0 auto;
+    padding: 0 20px;
+    text-align: center;
+}
+
+/* Контейнер для подпунктов с отступом */
+.subchapter-container {
+    margin-left: 40px; /* Отступ для подпунктов */
+}
+
 .mso-normal {
     font-family: 'Times New Roman', serif;
     font-size: 14pt;
