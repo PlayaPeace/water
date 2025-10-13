@@ -16,6 +16,7 @@
 <label for="">Высота этажа  <input type="text" placeholder="Введите высоту" data-floor-height></label><br><br>
 <label for="">Заселенность чел/кв  <input type="text" placeholder="Введите значение" data-population></label><br><br>
 <label for="">Количество приборов на этаже <input type="text" placeholder="Введите количество" data-num-devices></label><br><br>
+<label for="">Количество квартир на этаже <input type="text" placeholder="Введите количество" data-num-apartments></label><br><br>
 
 <h1 class="chapter-heading">
     <a name="_Toc211027131" class="chapter-anchor">
@@ -185,18 +186,23 @@
 </p>
 
 <div id="hiddenFormulaHtr"></div>
-<div id="formulaHtr" style="margin-top: 20px;">*формула*</div>
-<canvas id="canvasHtr" style="display: none;"></canvas>
+<div id="formulaHtr" style="text-indent: 1.25cm;">*формула*</div>
+<canvas id="canvasHtr" style="display: none; text-indent: 1.25cm;"></canvas>
 
-<p class="mso-normal">
-    <span class="text-content">
-        *формула*
-    </span>
-</p>
 
 <p class="mso-normal">
     <span class="text-content">
         Т.к. Нтр > Нгар значит, в моей системе необходима установка насоса.
+    </span>
+</p>
+
+<div id="hiddenFormulaHnijt"></div>
+<div id="formulaHnijt" style="text-indent: 1.25cm;">*формула*</div>
+<canvas id="canvasHnijt" style="display: none; text-indent: 1.25cm;"></canvas>
+
+<p class="mso-normal">
+    <span class="text-content">
+        Т.к. Нниж.т.< 45 м вод.ст., то принимаю однозонную схему водопроводной сети, согласно пункту 5.3.1.6 СП 30.13330.2020.
     </span>
 </p>
 
@@ -472,49 +478,49 @@
 
 <p class="mso-normal">
     <span class="text-content">
-        *формула*
+        U = U<sub>0</sub> * n<sub>кв.на эт.</sub> * n<sub>секц.</sub> * n<sub>эт.</sub> * n<sub>зд.</sub> где:
     </span>
 </p>
 
 <p class="mso-normal">
     <span class="text-content">
-        *формула*
+        U<sub>0</sub> – заселенность. U<sub>0</sub> = <input type="text" data-population>
     </span>
 </p>
 
 <p class="mso-normal">
     <span class="text-content">
-        *формула*
+        n<sub>кв.на эт.</sub> – число квартир на этаже. n<sub>кв.на эт.</sub> = <input type="text" data-num-apartments>
     </span>
 </p>
 
 <p class="mso-normal">
     <span class="text-content">
-        *формула*
+        n<sub>секц.</sub> – количество секций. n<sub>секц.</sub> = <input type="text" data-num-sections>
     </span>
 </p>
 
 <p class="mso-normal">
     <span class="text-content">
-        *формула*
+        n<sub>эт.</sub> – число этажей в доме. n<sub>эт.</sub> = <input type="text" data-num-floors>
     </span>
 </p>
 
 <p class="mso-normal">
     <span class="text-content">
-        *формула*
+        n<sub>дом</sub> – число домов на генплане. n<sub>зд.</sub> = <input type="text" data-num-buildings>
     </span>
 </p>
 
 <p class="mso-normal">
     <span class="text-content">
-        *формула*
+        U = <data u-calculate> </data>
     </span>
 </p>
 
 <p class="mso-normal">
     <span class="text-content">
-        *формула*
+        U = <data u> </data>
     </span>
 </p>
 

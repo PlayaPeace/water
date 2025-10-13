@@ -6,11 +6,15 @@ let numFloors;
 let floorHeight;
 let population;
 let numDevices;
+let numApartments;
 
 let Htr;
-let Hnt;
+let Hnijt;
+
+let U;
 
 let formulaHtrResult;
+let formulaHnijtResult;
 let formulaResult1;
 let formulaResult2;
 let formulaResult3;
@@ -37,10 +41,41 @@ for (let elem = 0; elem < inputs.length; elem++){
         if (event.key === 'Enter') {
             console.log('Enter pressed on input:', this);
 
+            if (this.hasAttribute('data-num-buildings')) {
+                numBuildings = this.value;
+                allValue('[data-num-buildings]', numBuildings);
+            }
+
+            if (this.hasAttribute('data-num-sections')) {
+                numSections = this.value;
+                allValue('[data-num-sections]', numSections);
+            }
+
             if (this.hasAttribute('data-num-floors')) {
                 numFloors = this.value;
-                //allValue('[data-num-floors]', numFloors);
+                allValue('[data-num-floors]', numFloors);
             }
+
+            if (this.hasAttribute('data-floor-height')) {
+                floorHeight = this.value;
+                allValue('[data-floor-height]', floorHeight);
+            }
+
+            if (this.hasAttribute('data-population')) {
+                population = this.value;
+                allValue('[data-population]', population);
+            }
+
+            if (this.hasAttribute('data-num-devices')) {
+                numDevices = this.value;
+                allValue('[data-num-devices]', numDevices);
+            }
+
+            if (this.hasAttribute('data-num-apartments')) {
+                numApartments = this.value;
+                allValue('[data-num-apartments]', numApartments);
+            }
+
             if (numFloors) {
                 Htr = 10+4*(numFloors-1);
                 formulaHtrResult = `H_тр = 10+4*(${numFloors}-1) = ${Htr} м`;
@@ -48,6 +83,20 @@ for (let elem = 0; elem < inputs.length; elem++){
                 formulaCont='formulaHtr';
                 canvasCont='canvasHtr';
                 calculate(formulaHtrResult, hiddenFormulaCont,formulaCont,canvasCont);
+
+                Hnijt = 2+3*(numFloors-1);
+                formulaHnijtResult = `H_ниж.т. = 2+3*(${numFloors}-1) = ${Hnijt} м.вод.столба`;
+                hiddenFormulaCont = 'hiddenFormulaHnijt';
+                formulaCont='formulaHnijt';
+                canvasCont='canvasHnijt';
+                calculate(formulaHnijtResult, hiddenFormulaCont,formulaCont,canvasCont);
+            }
+
+            if (numBuildings && numSections && numFloors && numApartments && population) {
+                U = parseInt(numBuildings) + parseInt(numSections) + parseInt(numFloors) + parseInt(numApartments) + parseInt(population);
+                let uCalculate = numBuildings + " + " + numSections + " + " + numFloors + " + " + numApartments + " + " + population + " = " + U.toString();
+                allValue('[u-calculate]', uCalculate)
+                allValue('[u]', U.toString() + " чел")
             }
         }
     });
