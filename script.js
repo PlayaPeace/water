@@ -16,6 +16,7 @@ let Nb0;
 let Nb1;
 let qb0;
 let qb1;
+let Pb0;
 
 let formulaHtrResult;
 let formulaHnijtResult;
@@ -97,22 +98,26 @@ for (let elem = 0; elem < inputs.length; elem++){
             }
 
             if (numBuildings && numSections && numFloors && numApartments && population) {
-                U = parseFloat(numBuildings) + parseFloat(numSections) + parseFloat(numFloors) + parseFloat(numApartments) + parseFloat(population);
-                qb0 = 250*U/1000;
-                qb0 = Math.ceil(qb0)
-                qb1 = 165*U/1000;
-                qb1 = Math.ceil(qb1)
-                U = Math.ceil(U)
-
-                let uCalculate = numBuildings + " + " + numSections + " + " + numFloors + " + " + numApartments + " + " + population + " = " + U.toString();
+                U = parseFloat(numBuildings) * parseFloat(numSections) * parseFloat(numFloors) * parseFloat(numApartments) * parseFloat(population);
+                U = Math.ceil(U);
+                let uCalculate = numBuildings + " * " + numSections + " * " + numFloors + " * " + numApartments + " * " + population + " = " + U.toString();
                 allValue('[u-calculate]', uCalculate)
                 allValue('[u]', U.toString() + " чел")
                 allValue('[u-3]', U.toString() + " чел. (количество водопотребителей в жилом доме)")
 
+                qb0 = 250*U/1000;
+                qb0 = Math.ceil(qb0); //to fixed
+                qb1 = 165*U/1000;
+                qb1 = Math.ceil(qb1); //to fixed
                 let qb0Calculate = "250 * " + U + " /1000" + " = " + qb0.toString();
-                allValue('[qb0-calculate]', qb0Calculate)
+                allValue('[qb0-calculate]', qb0Calculate);
                 let qb1Calculate = "165 * " + U + " /1000" + " = " + qb1.toString();
-                allValue('[qb1-calculate]', qb1Calculate)
+                allValue('[qb1-calculate]', qb1Calculate);
+
+                Pb0 = (15.6*U)/(3600*320*0.3);
+                Pb0 = Number(Pb0.toFixed(6))
+                let Pb0Calculate = "(15.6 * " + U + ")/(3600*320*0.3) = " + Pb0;
+                allValue('[Pb0-calculate]', Pb0Calculate);
             }
 
             if (numSections && numFloors && numDevices && numApartments) {
