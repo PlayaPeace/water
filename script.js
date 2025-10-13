@@ -17,10 +17,13 @@ let Nb1;
 let qb0;
 let qb1;
 let Pb0;
+let Pb1;
 let NP0;
 let NP1;
 let a1;
 let a2;
+let qb0s;
+let qb1s;
 
 let formulaHtrResult;
 let formulaHnijtResult;
@@ -122,6 +125,11 @@ for (let elem = 0; elem < inputs.length; elem++){
                 Pb0 = Number(Pb0.toFixed(6));
                 let Pb0Calculate = "(15.6 * " + U + ")/(3600*320*0.3) = " + Pb0;
                 allValue('[Pb0-calculate]', Pb0Calculate);
+
+                Pb1 = (7.1*U)/(3600*320*0.2);
+                Pb1 = Number(Pb1.toFixed(6));
+                let Pb1Calculate = "(7.1 * " + U + ")/(3600*320*0.2) = " + Pb1;
+                allValue('[Pb1-calculate]', Pb0Calculate);
             }
 
             if (numSections && numFloors && numDevices && numApartments) {
@@ -142,9 +150,26 @@ for (let elem = 0; elem < inputs.length; elem++){
             }
 
             if (NP0) {
-                console.log(findAlphaByNP(NP0))
-                allValue('[a1-calculate]', findAlphaByNP(NP0));
+                let a = findAlphaByNP(NP0);
+                allValue('[a1-calculate]', a);
+                qb0s = Number((5*parseFloat(a)*0.3).toFixed(4));
+                let qb0sCalculate = "5 * " + a + " * 0.3 = " + qb0s + " л/с";
+                allValue('[qb0s-calculate]', qb0sCalculate);
             }
+
+            if (Nb1 && Pb1) {
+                NP1 = Number((Nb1 * Pb1).toFixed(3));
+                allValue('[NP1-calculate]', NP1)
+            }
+
+            if (NP1) {
+                let a = findAlphaByNP(NP1);
+                allValue('[a2-calculate]', a);
+                qb1s = Number((5*parseFloat(a)*0.2).toFixed(4));
+                let qb1sCalculate = "5 * " + a + " * 0.2 = " + qb1s + " л/с";
+                allValue('[qb1s-calculate]', qb1sCalculate);
+            }
+
         }
     });
 }
