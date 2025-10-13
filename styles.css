@@ -39,6 +39,12 @@
     margin: 15px 0 10px 20px;
 }
 
+.subchapter-heading-0 {
+    text-align: left;
+    font-family: 'Times New Roman', serif;
+    font-size: 14pt;
+}
+
 /* Основной контейнер для выравнивания по центру страницы */
 .content-container {
     max-width: 210mm; /* Ширина как у А4 */
@@ -50,6 +56,11 @@
 /* Контейнер для подпунктов с отступом */
 .subchapter-container {
     margin-left: 40px; /* Отступ для подпунктов */
+}
+
+/* Основной контейнер для выравнивания по центру страницы */
+.subcontent-container {
+    text-indent: 1.25cm;
 }
 
 .mso-normal {
