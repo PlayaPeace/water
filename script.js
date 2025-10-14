@@ -120,10 +120,38 @@ for (let elem = 0; elem < inputs.length; elem++){
                 let Pb0Calculate = "(11.6 * " + U + ")/(3600*320*0.3) = " + Psb0;
                 allValue('[Pb0-calculate]', Pb0Calculate);
 
+                let formulaPB0sText = `\\text{1)} P_{\\text{сек}}^{\\text{BO}} = \\frac{11.6 * ${U}}{3600*320*0.3} = ${Psb0}`;
+                hiddenFormulaCont = 'hiddenFormulaPB0s';
+                formulaCont='formulaPB0s';
+                canvasCont='canvasPB0s';
+                calculate(formulaPB0sText, hiddenFormulaCont,formulaCont,canvasCont);
+
                 Psb1 = (5.1*U)/(3600*320*0.2);
                 Psb1 = Number(Psb1.toFixed(6));
                 let Pb1Calculate = "(5.1 * " + U + ")/(3600*320*0.2) = " + Psb1;
                 allValue('[Pb1-calculate]', Pb1Calculate);
+
+                let formulaPB1sText = `\\text{2)} P_{\\text{сек}}^{\\text{B1}} = \\frac{5.1 * ${U}}{3600*320*0.2} = ${Psb1}`;
+                hiddenFormulaCont = 'hiddenFormulaPB1s';
+                formulaCont='formulaPB1s';
+                canvasCont='canvasPB1s';
+                calculate(formulaPB1sText, hiddenFormulaCont,formulaCont,canvasCont);
+            }
+
+            if (U && qb0) {
+                let formulaQb0Text = `q^{\\text{b0}}_{\\text{сут}} = \\frac{q^{\\text{B0}}_{\\text{сут}} * U}{1000} = \\frac{180 * ${U}}{1000} = ${qb0}`;
+                hiddenFormulaCont = 'hiddenFormulaQb0';
+                formulaCont='formulaQb0';
+                canvasCont='canvasQb0';
+                calculate(formulaQb0Text, hiddenFormulaCont,formulaCont,canvasCont);
+            }
+
+            if(U && qb1) {
+                let formulaQb1Text = `q^{\\text{b1}}_{\\text{сут}} = \\frac{q^{\\text{B1}}_{\\text{сут}} * U}{1000} = \\frac{110 * ${U}}{1000} = ${qb1}`;
+                hiddenFormulaCont = 'hiddenFormulaQb1';
+                formulaCont='formulaQb1';
+                canvasCont='canvasQb1';
+                calculate(formulaQb1Text, hiddenFormulaCont,formulaCont,canvasCont);
             }
 
             if (numSections && numFloors && numDevices && numApartments && numBuildings) {
@@ -145,10 +173,17 @@ for (let elem = 0; elem < inputs.length; elem++){
 
             if (NP2) {
                 let a = findAlphaByNP(NP2);
+                a = Number(a.toFixed(5));
                 allValue('[a1-calculate]', a);
-                qb0s = Number((5*parseFloat(a)*0.3).toFixed(4));
+                qb0s = Number((5*a*0.3).toFixed(4));
                 let qb0sCalculate = "5 * " + a + " * 0.3 = " + qb0s + " л/с";
                 allValue('[qb0s-calculate]', qb0sCalculate);
+
+                let formulaQsB0Text = `q_{\\text{сек}}^{\\text{B0}} = 5 * ${a} * 0.3 = ${qb0s} \\frac{\\text{л}}{\\text{с}}`;
+                hiddenFormulaCont = 'hiddenFormulaQsB0';
+                formulaCont='formulaQsB0';
+                canvasCont='canvasQsB0';
+                calculate(formulaQsB0Text, hiddenFormulaCont,formulaCont,canvasCont);
             }
 
             if (Nb1 && Psb1) {
@@ -162,6 +197,12 @@ for (let elem = 0; elem < inputs.length; elem++){
                 qb1s = Number((5*parseFloat(a)*0.2).toFixed(4));
                 let qb1sCalculate = "5 * " + a + " * 0.2 = " + qb1s + " л/с";
                 allValue('[qb1s-calculate]', qb1sCalculate);
+
+                let formulaQsB1Text = `q_{\\text{сек}}^{\\text{B1}} = 5 * ${a} * 0.2 = ${qb1s} \\frac{\\text{л}}{\\text{с}}`;
+                hiddenFormulaCont = 'hiddenFormulaQsB1';
+                formulaCont='formulaQsB1';
+                canvasCont='canvasQsB1';
+                calculate(formulaQsB1Text, hiddenFormulaCont,formulaCont,canvasCont);
             }
 
             if (Psb0) {
@@ -169,6 +210,12 @@ for (let elem = 0; elem < inputs.length; elem++){
                 Phb0 = Number(Phb0.toFixed(6));
                 let Pb0Calculate = "(3600 * 0.3 * " + Psb0 + ")/300 = " + Phb0;
                 allValue('[Phb0-calculate]', Pb0Calculate);
+
+                let formulaPhb0Text = `\\text{1)} P_{\\text{ч}}^{\\text{BO}} = \\frac{3600 * 0.3 * ${Psb0}}{300} = ${Phb0}`;
+                hiddenFormulaCont = 'hiddenFormulaPhB0';
+                formulaCont='formulaPhB0';
+                canvasCont='canvasPhB0';
+                calculate(formulaPhb0Text, hiddenFormulaCont,formulaCont,canvasCont);
             }
 
             if (Phb0 && Nb0) {
@@ -189,6 +236,12 @@ for (let elem = 0; elem < inputs.length; elem++){
                 let qb0hCalculate = "0.005 * " + a + " * 300 = " + qb0h + " м³/час;";//³
                 allValue('[qb0h-calculate]', qb0hCalculate);
 
+                let formulaQhB0Text = `q_{\\text{ч}}^{\\text{B0}} = 0.005 * ${a} * 300 = ${qb0h} \\frac{\\text{м³}}{\\text{час}}`;
+                hiddenFormulaCont = 'hiddenFormulaQhB0';
+                formulaCont='formulaQhB0';
+                canvasCont='canvasQhB0';
+                calculate(formulaQhB0Text, hiddenFormulaCont,formulaCont,canvasCont);
+
                 const NP3Element = document.getElementById('NP3-result');
                 if (NP3Element) NP3Element.textContent = NP3;
             }
@@ -198,6 +251,12 @@ for (let elem = 0; elem < inputs.length; elem++){
                 Phb1 = Number(Phb1.toFixed(6));
                 let Pb1Calculate = "(3600 * 0.2 * " + Psb1 + ")/200 = " + Phb1;
                 allValue('[Phb1-calculate]', Pb1Calculate);
+
+                let formulaPhb1Text = `\\text{2)} P_{\\text{ч}}^{\\text{B1}} = \\frac{3600 * 0.2 * ${Psb1}}{200} = ${Phb1}`;
+                hiddenFormulaCont = 'hiddenFormulaPhB1';
+                formulaCont='formulaPhB1';
+                canvasCont='canvasPhB1';
+                calculate(formulaPhb1Text, hiddenFormulaCont,formulaCont,canvasCont);
             }
 
             if (Phb1 && Nb1) {
@@ -211,10 +270,46 @@ for (let elem = 0; elem < inputs.length; elem++){
                 qb1h = Number((0.005*parseFloat(a)*300).toFixed(4));
                 let qb1hCalculate = "0.005 * " + a + " * 200 = " + qb1h + " м³/час;";//³
                 allValue('[qb1h-calculate]', qb1hCalculate);
+
+                let formulaQhB1Text = `q_{\\text{ч}}^{\\text{B1}} = 0.005 * ${a} * 200 = ${qb1h} \\frac{\\text{м³}}{\\text{час}}`;
+                hiddenFormulaCont = 'hiddenFormulaQhB1';
+                formulaCont='formulaQhB1';
+                canvasCont='canvasQhB1';
+                calculate(formulaQhB1Text, hiddenFormulaCont,formulaCont,canvasCont);
             }
         }
     });
 }
+
+let formulaQdText = `q_{\\text{сут}} = \\frac{q_\\text{0 сут} * U}{1000}`;
+hiddenFormulaCont = 'hiddenFormulaQd';
+formulaCont='formulaQd';
+canvasCont='canvasQd';
+calculate(formulaQdText, hiddenFormulaCont,formulaCont,canvasCont);
+
+let formulaQmhText = `q_{\\text{ср час}} = \\frac{q_\\text{сут}}{T}`;
+hiddenFormulaCont = 'hiddenFormulaQmh';
+formulaCont='formulaQmh';
+canvasCont='canvasQmh';
+calculate(formulaQmhText, hiddenFormulaCont,formulaCont,canvasCont);
+
+let formulaQB0mhText = `q^{\\text{B0}}_{\\text{ср час}} = \\frac{60}{24} = 2.5 \\frac{\\text{м³}}{\\text{час}}`;
+hiddenFormulaCont = 'hiddenFormulaQB0mh';
+formulaCont='formulaQB0mh';
+canvasCont='canvasQB0mh';
+calculate(formulaQB0mhText, hiddenFormulaCont,formulaCont,canvasCont);
+
+let formulaQB1mhText = `q^{\\text{B1}}_{\\text{ср час}} = \\frac{39.6}{24} = 1.65 \\frac{\\text{м³}}{\\text{час}}`;
+hiddenFormulaCont = 'hiddenFormulaQB1mh';
+formulaCont='formulaQB1mh';
+canvasCont='canvasQB1mh';
+calculate(formulaQB1mhText, hiddenFormulaCont,formulaCont,canvasCont);
+
+let formulaPhText = `P_{\\text{ч}} = \\frac{P_{\\text{c}} * 3600 * q}{q_{\\text{0ч}}} {\\text{, где}}`;
+hiddenFormulaCont = 'hiddenFormulaPh';
+formulaCont='formulaPh';
+canvasCont='canvasPh';
+calculate(formulaPhText, hiddenFormulaCont,formulaCont,canvasCont);
 
 function allValue(item, value) {
     let items = document.querySelectorAll(item);
