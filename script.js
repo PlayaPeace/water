@@ -106,24 +106,24 @@ for (let elem = 0; elem < inputs.length; elem++){
                 allValue('[u]', U.toString() + " чел")
                 allValue('[u-3]', U.toString() + " чел. (количество водопотребителей в жилом доме)")
 
-                qb0 = 250*U/1000;
+                qb0 = 180*U/1000;
                 qb0 = Math.ceil(qb0); //to fixed
-                qb1 = 165*U/1000;
+                qb1 = 110*U/1000;
                 qb1 = Math.ceil(qb1); //to fixed
-                let qb0Calculate = "250 * " + U + " /1000" + " = " + qb0.toString();
+                let qb0Calculate = "180 * " + U + " /1000" + " = " + qb0.toString();
                 allValue('[qb0-calculate]', qb0Calculate);
-                let qb1Calculate = "165 * " + U + " /1000" + " = " + qb1.toString();
+                let qb1Calculate = "110 * " + U + " /1000" + " = " + qb1.toString();
                 allValue('[qb1-calculate]', qb1Calculate);
 
-                Psb0 = (15.6*U)/(3600*320*0.3);
+                Psb0 = (11.6*U)/(3600*320*0.3);
                 Psb0 = Number(Psb0.toFixed(6));
-                let Pb0Calculate = "(15.6 * " + U + ")/(3600*320*0.3) = " + Psb0;
+                let Pb0Calculate = "(11.6 * " + U + ")/(3600*320*0.3) = " + Psb0;
                 allValue('[Pb0-calculate]', Pb0Calculate);
 
-                Psb1 = (7.1*U)/(3600*320*0.2);
+                Psb1 = (5.1*U)/(3600*320*0.2);
                 Psb1 = Number(Psb1.toFixed(6));
-                let Pb1Calculate = "(7.1 * " + U + ")/(3600*320*0.2) = " + Psb1;
-                allValue('[Pb1-calculate]', Pb0Calculate);
+                let Pb1Calculate = "(5.1 * " + U + ")/(3600*320*0.2) = " + Psb1;
+                allValue('[Pb1-calculate]', Pb1Calculate);
             }
 
             if (numSections && numFloors && numDevices && numApartments) {
@@ -186,7 +186,7 @@ for (let elem = 0; elem < inputs.length; elem++){
                 let a = findAlphaByNP(NP3);
                 allValue('[a3-calculate]', a);
                 qb0h = Number((0.005*parseFloat(a)*300).toFixed(4));
-                let qb0hCalculate = "0.005 * " + a + " * 300 = " + qb0h + " м3/час";
+                let qb0hCalculate = "0.005 * " + a + " * 300 = " + qb0h + " м³/час;";//³
                 allValue('[qb0h-calculate]', qb0hCalculate);
 
                 const NP3Element = document.getElementById('NP3-result');
@@ -209,7 +209,7 @@ for (let elem = 0; elem < inputs.length; elem++){
                 let a = findAlphaByNP(NP4);
                 allValue('[a4-calculate]', a);
                 qb1h = Number((0.005*parseFloat(a)*300).toFixed(4));
-                let qb1hCalculate = "0.005 * " + a + " * 200 = " + qb1h + " м3/час";
+                let qb1hCalculate = "0.005 * " + a + " * 200 = " + qb1h + " м³/час;";//³
                 allValue('[qb1h-calculate]', qb1hCalculate);
             }
         }
