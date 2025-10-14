@@ -18,8 +18,8 @@ let qb0;
 let qb1;
 let Psb0;
 let Psb1;
-let NP0;
 let NP1;
+let NP2;
 let a1;
 let a2;
 let qb0s;
@@ -84,7 +84,7 @@ for (let elem = 0; elem < inputs.length; elem++){
 
             if (numFloors) {
                 Htr = 10+4*(numFloors-1);
-                formulaHtrResult = `H_тр = 10+4*(${numFloors}-1) = ${Htr} м`;
+                formulaHtrResult = `H_тр = 10+4*(${numFloors}-1) = ${Htr} м (1.1)`;
                 hiddenFormulaCont = 'hiddenFormulaHtr';
                 formulaCont='formulaHtr';
                 canvasCont='canvasHtr';
@@ -101,7 +101,7 @@ for (let elem = 0; elem < inputs.length; elem++){
             if (numBuildings && numSections && numFloors && numApartments && population) {
                 U = parseFloat(numBuildings) * parseFloat(numSections) * parseFloat(numFloors) * parseFloat(numApartments) * parseFloat(population);
                 U = Math.ceil(U);
-                let uCalculate = numBuildings + " * " + numSections + " * " + numFloors + " * " + numApartments + " * " + population + " = " + U.toString();
+                let uCalculate = numBuildings + " * " + numSections + " * " + numFloors + " * " + numApartments + " * " + population + " = " + U;
                 allValue('[u-calculate]', uCalculate)
                 allValue('[u]', U.toString() + " чел")
                 allValue('[u-3]', U.toString() + " чел. (количество водопотребителей в жилом доме)")
@@ -139,12 +139,12 @@ for (let elem = 0; elem < inputs.length; elem++){
 
             if (Nb0 && Psb0) {
                 //NP0 = Number((Nb0 * Number(Pb0.toFixed(1))).toFixed(3));
-                NP0 = Number((Nb0 * Psb0).toFixed(3));
-                allValue('[NP0-calculate]', NP0)
+                NP2 = Number((Nb0 * Psb0).toFixed(3));
+                allValue('[NP0-calculate]', NP2)
             }
 
-            if (NP0) {
-                let a = findAlphaByNP(NP0);
+            if (NP2) {
+                let a = findAlphaByNP(NP2);
                 allValue('[a1-calculate]', a);
                 qb0s = Number((5*parseFloat(a)*0.3).toFixed(4));
                 let qb0sCalculate = "5 * " + a + " * 0.3 = " + qb0s + " л/с";
@@ -152,12 +152,12 @@ for (let elem = 0; elem < inputs.length; elem++){
             }
 
             if (Nb1 && Psb1) {
-                NP1 = Number((Nb1 * Psb1).toFixed(3));
-                allValue('[NP1-calculate]', NP1)
+                NP2 = Number((Nb1 * Psb1).toFixed(3));
+                allValue('[NP1-calculate]', NP2)
             }
 
-            if (NP1) {
-                let a = findAlphaByNP(NP1);
+            if (NP2) {
+                let a = findAlphaByNP(NP2);
                 allValue('[a2-calculate]', a);
                 qb1s = Number((5*parseFloat(a)*0.2).toFixed(4));
                 let qb1sCalculate = "5 * " + a + " * 0.2 = " + qb1s + " л/с";
@@ -174,6 +174,12 @@ for (let elem = 0; elem < inputs.length; elem++){
             if (Phb0 && Nb0) {
                 NP3 = Number((Nb0 * Phb0).toFixed(3));
                 allValue('[NP3-calculate]', NP3)
+
+                const Phb0Element = document.getElementById('Phb0-result');
+                const Nb0Element = document.getElementById('Nb0-result');
+
+                if (Phb0Element) Phb0Element.textContent = Phb0;
+                if (Nb0Element) Nb0Element.textContent = Nb0;
             }
 
             if (NP3) {
@@ -182,6 +188,9 @@ for (let elem = 0; elem < inputs.length; elem++){
                 qb0h = Number((0.005*parseFloat(a)*300).toFixed(4));
                 let qb0hCalculate = "0.005 * " + a + " * 300 = " + qb0h + " м3/час";
                 allValue('[qb0h-calculate]', qb0hCalculate);
+
+                const NP3Element = document.getElementById('NP3-result');
+                if (NP3Element) NP3Element.textContent = NP3;
             }
 
             if (Psb1) {
