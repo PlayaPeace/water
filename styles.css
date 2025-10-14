@@ -70,6 +70,24 @@
     line-height: 1.5;
     text-indent: 1.25cm;
 }
+
+.mso-heading {
+    font-family: 'Times New Roman', serif;
+    font-size: 14pt;
+    color: black;
+    line-height: 1.5;
+    text-align: center;
+}
+
+.container {
+    display: flex;
+    align-items: center; /* выравнивание по вертикали */
+    gap: 80px; /* расстояние между элементами */
+    font-family: 'Times New Roman', serif;
+    font-size: 14pt;
+    justify-content: center;
+}
+
 .text-content {
     line-height: 1.5;
     display: inline-block;
