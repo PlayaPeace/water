@@ -126,13 +126,13 @@ for (let elem = 0; elem < inputs.length; elem++){
                 allValue('[Pb1-calculate]', Pb1Calculate);
             }
 
-            if (numSections && numFloors && numDevices && numApartments) {
-                Nb0 = parseFloat(numSections) * parseFloat(numFloors) * parseFloat(numDevices) * parseFloat(numApartments);
+            if (numSections && numFloors && numDevices && numApartments && numBuildings) {
+                Nb0 = parseFloat(numSections) * parseFloat(numFloors) * parseFloat(numDevices) * parseFloat(numApartments) * parseFloat(numBuildings);
                 Nb0 = Math.ceil(Nb0)
-                Nb1 = parseFloat(numSections) * parseFloat(numFloors) * parseFloat(numDevices) * parseFloat(numApartments);
+                Nb1 = parseFloat(numSections) * parseFloat(numFloors) * parseFloat(numDevices) * parseFloat(numApartments) * parseFloat(numBuildings);
                 Nb1 = Math.ceil(Nb1)
-                let Nb0Calculate = numSections + " * " + numFloors + " * " + numDevices + " * " + numApartments + " = " + Nb0.toString();
-                let Nb1Calculate = numSections + " * " + numFloors + " * " + numDevices + " * " + numApartments + " = " + Nb1.toString();
+                let Nb0Calculate = numSections + " * " + numFloors + " * " + numDevices + " * " + numApartments + " * " + numBuildings + " = " + Nb0;
+                let Nb1Calculate = numSections + " * " + numFloors + " * " + numDevices + " * " + numApartments + " * " + numBuildings + " = " + Nb1;
                 allValue('[Nb0-calculate]', Nb0Calculate + " шт")
                 allValue('[Nb1-calculate]', Nb1Calculate + " шт")
             }
