@@ -173,7 +173,7 @@ for (let elem = 0; elem < inputs.length; elem++){
 
             if (NP2) {
                 let a = findAlphaByNP(NP2);
-                a = Number(a.toFixed(5));
+                a = Number(a.toFixed(3));
                 allValue('[a1-calculate]', a);
                 qb0s = Number((5*a*0.3).toFixed(4));
                 let qb0sCalculate = "5 * " + a + " * 0.3 = " + qb0s + " л/с";
@@ -193,8 +193,9 @@ for (let elem = 0; elem < inputs.length; elem++){
 
             if (NP2) {
                 let a = findAlphaByNP(NP2);
+                a = Number(a.toFixed(3));
                 allValue('[a2-calculate]', a);
-                qb1s = Number((5*parseFloat(a)*0.2).toFixed(4));
+                qb1s = Number((5*a*0.2).toFixed(4));
                 let qb1sCalculate = "5 * " + a + " * 0.2 = " + qb1s + " л/с";
                 allValue('[qb1s-calculate]', qb1sCalculate);
 
@@ -231,8 +232,9 @@ for (let elem = 0; elem < inputs.length; elem++){
 
             if (NP3) {
                 let a = findAlphaByNP(NP3);
+                a = Number(a.toFixed(3));
                 allValue('[a3-calculate]', a);
-                qb0h = Number((0.005*parseFloat(a)*300).toFixed(4));
+                qb0h = Number((0.005*a*300).toFixed(4));
                 let qb0hCalculate = "0.005 * " + a + " * 300 = " + qb0h + " м³/час;";//³
                 allValue('[qb0h-calculate]', qb0hCalculate);
 
@@ -266,8 +268,9 @@ for (let elem = 0; elem < inputs.length; elem++){
 
             if (NP4) {
                 let a = findAlphaByNP(NP4);
+                a = Number(a.toFixed(3));
                 allValue('[a4-calculate]', a);
-                qb1h = Number((0.005*parseFloat(a)*300).toFixed(4));
+                qb1h = Number((0.005*a*300).toFixed(4));
                 let qb1hCalculate = "0.005 * " + a + " * 200 = " + qb1h + " м³/час;";//³
                 allValue('[qb1h-calculate]', qb1hCalculate);
 
