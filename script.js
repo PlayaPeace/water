@@ -114,28 +114,6 @@ for (let elem = 0; elem < inputs.length; elem++){
                 allValue('[qb0-calculate]', qb0Calculate);
                 let qb1Calculate = "110 * " + U + " /1000" + " = " + qb1;
                 allValue('[qb1-calculate]', qb1Calculate);
-
-                Psb0 = (11.6*U)/(3600*320*0.3);
-                Psb0 = Number(Psb0.toFixed(6));
-                let Pb0Calculate = "(11.6 * " + U + ")/(3600*320*0.3) = " + Psb0;
-                allValue('[Pb0-calculate]', Pb0Calculate);
-
-                let formulaPB0sText = `\\text{1)} P_{\\text{сек}}^{\\text{BO}} = \\frac{11.6 * ${U}}{3600*320*0.3} = ${Psb0}`;
-                hiddenFormulaCont = 'hiddenFormulaPB0s';
-                formulaCont='formulaPB0s';
-                canvasCont='canvasPB0s';
-                calculate(formulaPB0sText, hiddenFormulaCont,formulaCont,canvasCont);
-
-                Psb1 = (5.1*U)/(3600*320*0.2);
-                Psb1 = Number(Psb1.toFixed(6));
-                let Pb1Calculate = "(5.1 * " + U + ")/(3600*320*0.2) = " + Psb1;
-                allValue('[Pb1-calculate]', Pb1Calculate);
-
-                let formulaPB1sText = `\\text{2)} P_{\\text{сек}}^{\\text{B1}} = \\frac{5.1 * ${U}}{3600*320*0.2} = ${Psb1}`;
-                hiddenFormulaCont = 'hiddenFormulaPB1s';
-                formulaCont='formulaPB1s';
-                canvasCont='canvasPB1s';
-                calculate(formulaPB1sText, hiddenFormulaCont,formulaCont,canvasCont);
             }
 
             if (U && qb0) {
@@ -177,6 +155,32 @@ for (let elem = 0; elem < inputs.length; elem++){
                 let Nb1Calculate = numSections + " * " + numFloors + " * " + numDevices + " * " + numApartments + " * " + numBuildings + " = " + Nb1;
                 allValue('[Nb0-calculate]', Nb0Calculate + " шт")
                 allValue('[Nb1-calculate]', Nb1Calculate + " шт")
+            }
+
+            if (U && Nb0) {
+                Psb0 = (11.6*U)/(3600*Nb0*0.3);
+                Psb0 = Number(Psb0.toFixed(6));
+                let Pb0Calculate = "(11.6 * " + U + `)/(3600*${Nb0}*0.3) = ` + Psb0;
+                allValue('[Pb0-calculate]', Pb0Calculate);
+
+                let formulaPB0sText = `\\text{1)} P_{\\text{сек}}^{\\text{BO}} = \\frac{11.6 * ${U}}{3600*${Nb0}*0.3} = ${Psb0}`;
+                hiddenFormulaCont = 'hiddenFormulaPB0s';
+                formulaCont='formulaPB0s';
+                canvasCont='canvasPB0s';
+                calculate(formulaPB0sText, hiddenFormulaCont,formulaCont,canvasCont);
+            }
+
+            if (U && Nb1) {
+                Psb1 = (5.1*U)/(3600*Nb1*0.2);
+                Psb1 = Number(Psb1.toFixed(6));
+                let Pb1Calculate = "(5.1 * " + U + ")/(3600*${Nb1}*0.2) = " + Psb1;
+                allValue('[Pb1-calculate]', Pb1Calculate);
+
+                let formulaPB1sText = `\\text{2)} P_{\\text{сек}}^{\\text{B1}} = \\frac{5.1 * ${U}}{3600*${Nb1}*0.2} = ${Psb1}`;
+                hiddenFormulaCont = 'hiddenFormulaPB1s';
+                formulaCont='formulaPB1s';
+                canvasCont='canvasPB1s';
+                calculate(formulaPB1sText, hiddenFormulaCont,formulaCont,canvasCont);
             }
 
             if (Nb0 && Psb0) {
