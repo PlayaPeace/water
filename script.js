@@ -89,9 +89,12 @@ for (let elem = 0; elem < inputs.length; elem++){
                 formulaCont='formulaHtr';
                 canvasCont='canvasHtr';
                 calculate(formulaHtrResult, hiddenFormulaCont,formulaCont,canvasCont);
+            }
 
-                Hnijt = 2+3*(numFloors-1);
-                formulaHnijtResult = `H_{\\text{ниж.т.}} = 2+3*(${numFloors}-1) = ${Hnijt} м.вод.столба`;
+            if (numFloors && floorHeight) {
+                Hnijt = 2+floorHeight*(numFloors-1);
+                Hnijt = Number(Hnijt.toFixed(1));
+                formulaHnijtResult = `H_{\\text{ниж.т.}} = 2+${floorHeight}*(${numFloors}-1) = ${Hnijt} {\\text{м.вод.столба}}`;
                 hiddenFormulaCont = 'hiddenFormulaHnijt';
                 formulaCont='formulaHnijt';
                 canvasCont='canvasHnijt';
@@ -104,7 +107,7 @@ for (let elem = 0; elem < inputs.length; elem++){
                 let uCalculate = numBuildings + " * " + numSections + " * " + numFloors + " * " + numApartments + " * " + population + " = " + U;
                 allValue('[u-calculate]', uCalculate)
                 allValue('[u]', U.toString() + " чел")
-                allValue('[u-3]', U.toString() + " чел. (количество водопотребителей в жилом доме)")
+                allValue('[u-3]', U.toString() + " чел. (количество водопотребителей)")
 
                 qb0 = 180*U/1000;
                 qb0 = Number(qb0.toFixed(2)); //to fixed
