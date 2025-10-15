@@ -84,14 +84,14 @@ for (let elem = 0; elem < inputs.length; elem++){
 
             if (numFloors) {
                 Htr = 10+4*(numFloors-1);
-                formulaHtrResult = `H_тр = 10+4*(${numFloors}-1) = ${Htr} м (1.1)`;
+                formulaHtrResult = `H_{\\text{тр}} = 10+4*(${numFloors}-1) = ${Htr} м (1.1)`;
                 hiddenFormulaCont = 'hiddenFormulaHtr';
                 formulaCont='formulaHtr';
                 canvasCont='canvasHtr';
                 calculate(formulaHtrResult, hiddenFormulaCont,formulaCont,canvasCont);
 
                 Hnijt = 2+3*(numFloors-1);
-                formulaHnijtResult = `H_ниж.т. = 2+3*(${numFloors}-1) = ${Hnijt} м.вод.столба`;
+                formulaHnijtResult = `H_{\\text{ниж.т.}} = 2+3*(${numFloors}-1) = ${Hnijt} м.вод.столба`;
                 hiddenFormulaCont = 'hiddenFormulaHnijt';
                 formulaCont='formulaHnijt';
                 canvasCont='canvasHnijt';
@@ -338,11 +338,17 @@ formulaCont='formulaQmh';
 canvasCont='canvasQmh';
 calculate(formulaQmhText, hiddenFormulaCont,formulaCont,canvasCont);
 
-let formulaPhText = `P_{\\text{ч}} = \\frac{P_{\\text{c}} * 3600 * q}{q_{\\text{0ч}}} {\\text{, где}}`;
-hiddenFormulaCont = 'hiddenFormulaPh';
-formulaCont='formulaPh';
-canvasCont='canvasPh';
-calculate(formulaPhText, hiddenFormulaCont,formulaCont,canvasCont);
+let formulaQdB0Text = `q_{\\text{сут}}^{\\text{B0}} = 180 \\frac{\\text{л}}{\\text{сут}}`;
+hiddenFormulaCont = 'hiddenFormulaQdB0';
+formulaCont='formulaQdB0';
+canvasCont='canvasQdB0';
+calculate(formulaQdB0Text, hiddenFormulaCont,formulaCont,canvasCont);
+
+let formulaQdB1Text = `q_{\\text{сут}}^{\\text{B1}} = 110 \\frac{\\text{л}}{\\text{сут}}`;
+hiddenFormulaCont = 'hiddenFormulaQdB1';
+formulaCont='formulaQdB1';
+canvasCont='canvasQdB1';
+calculate(formulaQdB1Text, hiddenFormulaCont,formulaCont,canvasCont);
 
 function allValue(item, value) {
     let items = document.querySelectorAll(item);
@@ -369,7 +375,7 @@ function calculate(formulaResult, hiddenFormulaCont, formulaCont, canvasCont) {
             var img = new Image();
             img.onload = function() {
                 // Увеличение разрешения и уменьшение размера
-                var scaleFactor = 1.2;
+                var scaleFactor = 1.1;
                 canvas.width = img.width * scaleFactor;
                 canvas.height = img.height * scaleFactor;
                 var ctx = canvas.getContext('2d');
