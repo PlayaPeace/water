@@ -338,6 +338,12 @@ formulaCont='formulaQmh';
 canvasCont='canvasQmh';
 calculate(formulaQmhText, hiddenFormulaCont,formulaCont,canvasCont);
 
+let formulaPhText = `P_{\\text{ч}} = \\frac{P_{\\text{c}} * 3600 * q}{q_{\\text{0ч}}} {\\text{, где}}`;
+hiddenFormulaCont = 'hiddenFormulaPh';
+formulaCont='formulaPh';
+canvasCont='canvasPh';
+calculate(formulaPhText, hiddenFormulaCont,formulaCont,canvasCont);
+
 let formulaQdB0Text = `q_{\\text{сут}}^{\\text{B0}} = 180 \\frac{\\text{л}}{\\text{сут}}`;
 hiddenFormulaCont = 'hiddenFormulaQdB0';
 formulaCont='formulaQdB0';
