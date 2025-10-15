@@ -328,7 +328,7 @@ for (let elem = 0; elem < inputs.length; elem++){
                 let a = findAlphaByNP(NP4);
                 a = Number(a.toFixed(3));
                 allValue('[a4-calculate]', a);
-                qb1h = Number((0.005*a*300).toFixed(4));
+                qb1h = Number((0.005*a*200).toFixed(4));
                 let qb1hCalculate = "0.005 * " + a + " * 200 = " + qb1h + " м³/час;";//³
                 allValue('[qb1h-calculate]', qb1hCalculate);
 
