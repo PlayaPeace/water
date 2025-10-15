@@ -107,12 +107,12 @@ for (let elem = 0; elem < inputs.length; elem++){
                 allValue('[u-3]', U.toString() + " чел. (количество водопотребителей в жилом доме)")
 
                 qb0 = 180*U/1000;
-                qb0 = Math.ceil(qb0); //to fixed
+                qb0 = Number(qb0.toFixed(2)); //to fixed
                 qb1 = 110*U/1000;
-                qb1 = Math.ceil(qb1); //to fixed
-                let qb0Calculate = "180 * " + U + " /1000" + " = " + qb0.toString();
+                qb1 = Number(qb1.toFixed(2)); //to fixed
+                let qb0Calculate = "180 * " + U + " /1000" + " = " + qb0;
                 allValue('[qb0-calculate]', qb0Calculate);
-                let qb1Calculate = "110 * " + U + " /1000" + " = " + qb1.toString();
+                let qb1Calculate = "110 * " + U + " /1000" + " = " + qb1;
                 allValue('[qb1-calculate]', qb1Calculate);
 
                 Psb0 = (11.6*U)/(3600*320*0.3);
