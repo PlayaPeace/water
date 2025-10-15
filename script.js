@@ -105,7 +105,7 @@ for (let elem = 0; elem < inputs.length; elem++){
                 U = parseFloat(numBuildings) * parseFloat(numSections) * parseFloat(numFloors) * parseFloat(numApartments) * parseFloat(population);
                 let uCalculate = numBuildings + " * " + numSections + " * " + numFloors + " * " + numApartments + " * " + population + " = " + U;
                 allValue('[u-calculate]', uCalculate)
-                U = Math.ceil(U);uCalculate = numBuildings + " * " + numSections + " * " + numFloors + " * " + numApartments + " * " + population + " = " + U;
+                U = Math.ceil(U);
                 allValue('[u]', U.toString() + " чел")
                 allValue('[u-3]', U.toString() + " чел. (количество водопотребителей)")
 
@@ -211,6 +211,9 @@ for (let elem = 0; elem < inputs.length; elem++){
                 formulaCont='formulaQsB0';
                 canvasCont='canvasQsB0';
                 calculate(formulaQsB0Text, hiddenFormulaCont,formulaCont,canvasCont);
+
+                const NP1Element = document.getElementById('NP1-result');
+                if (NP1Element) NP1Element.textContent = NP1;
             }
 
             if (Nb1 && Psb1) {
@@ -237,6 +240,9 @@ for (let elem = 0; elem < inputs.length; elem++){
                 formulaCont='formulaQsB1';
                 canvasCont='canvasQsB1';
                 calculate(formulaQsB1Text, hiddenFormulaCont,formulaCont,canvasCont);
+
+                const NP2Element = document.getElementById('NP2-result');
+                if (NP2Element) NP2Element.textContent = NP2;
             }
 
             if (Psb0) {
@@ -309,6 +315,12 @@ for (let elem = 0; elem < inputs.length; elem++){
                 formulaCont='formulaA4NP';
                 canvasCont='canvasA4NP';
                 calculate(formulaA4NPText, hiddenFormulaCont,formulaCont,canvasCont);
+
+                const Phb0Element = document.getElementById('Phb1-result');
+                const Nb0Element = document.getElementById('Nb1-result');
+
+                if (Phb0Element) Phb0Element.textContent = Phb0;
+                if (Nb0Element) Nb0Element.textContent = Nb0;
             }
 
             if (NP4) {
@@ -324,6 +336,9 @@ for (let elem = 0; elem < inputs.length; elem++){
                 formulaCont='formulaQhB1';
                 canvasCont='canvasQhB1';
                 calculate(formulaQhB1Text, hiddenFormulaCont,formulaCont,canvasCont);
+
+                const NP4Element = document.getElementById('NP4-result');
+                if (NP4Element) NP4Element.textContent = NP4;
             }
         }
     });
