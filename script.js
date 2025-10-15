@@ -103,6 +103,7 @@ for (let elem = 0; elem < inputs.length; elem++){
 
             if (numBuildings && numSections && numFloors && numApartments && population) {
                 U = parseFloat(numBuildings) * parseFloat(numSections) * parseFloat(numFloors) * parseFloat(numApartments) * parseFloat(population);
+                U = Number(U.toFixed(2));
                 let uCalculate = numBuildings + " * " + numSections + " * " + numFloors + " * " + numApartments + " * " + population + " = " + U;
                 allValue('[u-calculate]', uCalculate)
                 U = Math.ceil(U);
