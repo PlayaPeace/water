@@ -144,6 +144,13 @@ for (let elem = 0; elem < inputs.length; elem++){
                 formulaCont='formulaQb0';
                 canvasCont='canvasQb0';
                 calculate(formulaQb0Text, hiddenFormulaCont,formulaCont,canvasCont);
+
+                let qB0mh = Number((qb0/24).toFixed(2));
+                let formulaQB0mhText = `q^{\\text{B0}}_{\\text{ср час}} = \\frac{${qb0}}{24} = ${qB0mh} \\frac{\\text{м³}}{\\text{час}}`;
+                hiddenFormulaCont = 'hiddenFormulaQB0mh';
+                formulaCont='formulaQB0mh';
+                canvasCont='canvasQB0mh';
+                calculate(formulaQB0mhText, hiddenFormulaCont,formulaCont,canvasCont);
             }
 
             if(U && qb1) {
@@ -152,6 +159,13 @@ for (let elem = 0; elem < inputs.length; elem++){
                 formulaCont='formulaQb1';
                 canvasCont='canvasQb1';
                 calculate(formulaQb1Text, hiddenFormulaCont,formulaCont,canvasCont);
+
+                let qB1mh = Number((qb1/24).toFixed(2));
+                let formulaQB1mhText = `q^{\\text{B1}}_{\\text{ср час}} = \\frac{${qb1}}{24} = ${qB1mh} \\frac{\\text{м³}}{\\text{час}}`;
+                hiddenFormulaCont = 'hiddenFormulaQB1mh';
+                formulaCont='formulaQB1mh';
+                canvasCont='canvasQB1mh';
+                calculate(formulaQB1mhText, hiddenFormulaCont,formulaCont,canvasCont);
             }
 
             if (numSections && numFloors && numDevices && numApartments && numBuildings) {
@@ -295,18 +309,6 @@ hiddenFormulaCont = 'hiddenFormulaQmh';
 formulaCont='formulaQmh';
 canvasCont='canvasQmh';
 calculate(formulaQmhText, hiddenFormulaCont,formulaCont,canvasCont);
-
-let formulaQB0mhText = `q^{\\text{B0}}_{\\text{ср час}} = \\frac{60}{24} = 2.5 \\frac{\\text{м³}}{\\text{час}}`;
-hiddenFormulaCont = 'hiddenFormulaQB0mh';
-formulaCont='formulaQB0mh';
-canvasCont='canvasQB0mh';
-calculate(formulaQB0mhText, hiddenFormulaCont,formulaCont,canvasCont);
-
-let formulaQB1mhText = `q^{\\text{B1}}_{\\text{ср час}} = \\frac{39.6}{24} = 1.65 \\frac{\\text{м³}}{\\text{час}}`;
-hiddenFormulaCont = 'hiddenFormulaQB1mh';
-formulaCont='formulaQB1mh';
-canvasCont='canvasQB1mh';
-calculate(formulaQB1mhText, hiddenFormulaCont,formulaCont,canvasCont);
 
 let formulaPhText = `P_{\\text{ч}} = \\frac{P_{\\text{c}} * 3600 * q}{q_{\\text{0ч}}} {\\text{, где}}`;
 hiddenFormulaCont = 'hiddenFormulaPh';
