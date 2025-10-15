@@ -103,9 +103,9 @@ for (let elem = 0; elem < inputs.length; elem++){
 
             if (numBuildings && numSections && numFloors && numApartments && population) {
                 U = parseFloat(numBuildings) * parseFloat(numSections) * parseFloat(numFloors) * parseFloat(numApartments) * parseFloat(population);
-                U = Math.ceil(U);
                 let uCalculate = numBuildings + " * " + numSections + " * " + numFloors + " * " + numApartments + " * " + population + " = " + U;
                 allValue('[u-calculate]', uCalculate)
+                U = Math.ceil(U);uCalculate = numBuildings + " * " + numSections + " * " + numFloors + " * " + numApartments + " * " + population + " = " + U;
                 allValue('[u]', U.toString() + " чел")
                 allValue('[u-3]', U.toString() + " чел. (количество водопотребителей)")
 
