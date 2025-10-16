@@ -133,6 +133,14 @@ for (let elem = 0; elem < inputs.length; elem++){
                 formulaCont='formulaQB0mh';
                 canvasCont='canvasQB0mh';
                 calculate(formulaQB0mhText, hiddenFormulaCont,formulaCont,canvasCont);
+
+                const Qb0mhTableElement = document.getElementById('Qb0mh-table');
+                if (Qb0mhTableElement) Qb0mhTableElement.textContent = qB0mh.toString();
+                allValue('Qb0mh-table', qB0mh);
+
+                const Qb0dTableElement = document.getElementById('Qb0d-table');
+                if (Qb0dTableElement) Qb0dTableElement.textContent = qb0;
+                allValue('Qb0d-table', qb0);
             }
 
             if(U && qb1) {
@@ -148,6 +156,14 @@ for (let elem = 0; elem < inputs.length; elem++){
                 formulaCont='formulaQB1mh';
                 canvasCont='canvasQB1mh';
                 calculate(formulaQB1mhText, hiddenFormulaCont,formulaCont,canvasCont);
+
+                const Qb1mhTableElement = document.getElementById('Qb1mh-table');
+                if (Qb1mhTableElement) Qb1mhTableElement.textContent = qB1mh.toString();
+                allValue('Qb1mh-table', qB1mh);
+
+                const Qb1dTableElement = document.getElementById('Qb1d-table');
+                if (Qb1dTableElement) Qb1dTableElement.textContent = qb1;
+                allValue('Qb1d-table', qb1);
             }
 
             if (numSections && numFloors && numDevices && numApartments && numBuildings) {
@@ -213,6 +229,10 @@ for (let elem = 0; elem < inputs.length; elem++){
                 canvasCont='canvasQsB0';
                 calculate(formulaQsB0Text, hiddenFormulaCont,formulaCont,canvasCont);
 
+                const Qb0maxsTableElement = document.getElementById('Qb0maxs-table');
+                if (Qb0maxsTableElement) Qb0maxsTableElement.textContent = qb0s;
+                allValue('Qb0maxs-table', qb0s);
+
                 const NP1Element = document.getElementById('NP1-result');
                 if (NP1Element) NP1Element.textContent = NP1;
             }
@@ -241,6 +261,10 @@ for (let elem = 0; elem < inputs.length; elem++){
                 formulaCont='formulaQsB1';
                 canvasCont='canvasQsB1';
                 calculate(formulaQsB1Text, hiddenFormulaCont,formulaCont,canvasCont);
+
+                const Qb1maxsTableElement = document.getElementById('Qb1maxs-table');
+                if (Qb1maxsTableElement) Qb1maxsTableElement.textContent = qb1s;
+                allValue('Qb1maxs-table', qb1s);
 
                 const NP2Element = document.getElementById('NP2-result');
                 if (NP2Element) NP2Element.textContent = NP2;
@@ -290,6 +314,10 @@ for (let elem = 0; elem < inputs.length; elem++){
                 canvasCont='canvasQhB0';
                 calculate(formulaQhB0Text, hiddenFormulaCont,formulaCont,canvasCont);
 
+                const Qb0maxhTableElement = document.getElementById('Qb0maxh-table');
+                if (Qb0maxhTableElement) Qb0maxhTableElement.textContent = qb0h;
+                allValue('Qb0maxh-table', qb0h);
+
                 const NP3Element = document.getElementById('NP3-result');
                 if (NP3Element) NP3Element.textContent = NP3;
             }
@@ -338,6 +366,10 @@ for (let elem = 0; elem < inputs.length; elem++){
                 canvasCont='canvasQhB1';
                 calculate(formulaQhB1Text, hiddenFormulaCont,formulaCont,canvasCont);
 
+                const Qb1maxhTableElement = document.getElementById('Qb1maxh-table');
+                if (Qb1maxhTableElement) Qb1maxhTableElement.textContent = qb1h;
+                allValue('Qb1maxh-table', qb1h);
+
                 const NP4Element = document.getElementById('NP4-result');
                 if (NP4Element) NP4Element.textContent = NP4;
             }
@@ -374,6 +406,30 @@ hiddenFormulaCont = 'hiddenFormulaQdB1';
 formulaCont='formulaQdB1';
 canvasCont='canvasQdB1';
 calculate(formulaQdB1Text, hiddenFormulaCont,formulaCont,canvasCont);
+
+let formulaTableQdText = `q_{\\text{сут.}} \\text{, } \\frac{\\text{м³}}{\\text{сут}}`;
+hiddenFormulaCont = 'hiddenFormulaTableQd';
+formulaCont='formulaTableQd';
+canvasCont='canvasTableQd';
+calculate(formulaTableQdText, hiddenFormulaCont,formulaCont,canvasCont);
+
+let formulaTableQmhText = `q_{\\text{ср. час}} \\text{, } \\frac{\\text{м³}}{\\text{час}}`;
+hiddenFormulaCont = 'hiddenFormulaTableQmh';
+formulaCont='formulaTableQmh';
+canvasCont='canvasTableQmh';
+calculate(formulaTableQmhText, hiddenFormulaCont,formulaCont,canvasCont);
+
+let formulaTableQmaxhText = `q_{\\text{max час}} \\text{, } \\frac{\\text{м³}}{\\text{час}}`;
+hiddenFormulaCont = 'hiddenFormulaTableQmaxh';
+formulaCont='formulaTableQmaxh';
+canvasCont='canvasTableQmaxh';
+calculate(formulaTableQmaxhText, hiddenFormulaCont,formulaCont,canvasCont);
+
+let formulaTableQmaxsText = `q_{\\text{max сек.}} \\text{, } \\frac{\\text{л}}{\\text{сек}}`;
+hiddenFormulaCont = 'hiddenFormulaTableQmaxs';
+formulaCont='formulaTableQmaxs';
+canvasCont='canvasTableQmaxs';
+calculate(formulaTableQmaxsText, hiddenFormulaCont,formulaCont,canvasCont);
 
 function allValue(item, value) {
     let items = document.querySelectorAll(item);
