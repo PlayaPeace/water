@@ -208,7 +208,7 @@ for (let elem = 0; elem < inputs.length; elem++){
                 NP1 = Number((Nb0 * Psb0).toFixed(3));
                 allValue('[NP0-calculate]', NP1)
 
-                let formulaA1NPText = `\\text{α(N}\\text{P}_с\\text{)} = α(${Nb0} * ${Psb0}) = α(${NP1})`;
+                let formulaA1NPText = `\\text{α(N}\\text{P}_с^\\text{B0}\\text{)} = α(${Nb0} * ${Psb0}) = α(${NP1})`;
                 hiddenFormulaCont = 'hiddenFormulaA1NP';
                 formulaCont='formulaA1NP';
                 canvasCont='canvasA1NP';
@@ -241,7 +241,7 @@ for (let elem = 0; elem < inputs.length; elem++){
                 NP2 = Number((Nb1 * Psb1).toFixed(3));
                 allValue('[NP1-calculate]', NP2)
 
-                let formulaA2NPText = `\\text{α(N}\\text{P}_с\\text{)} = α(${Nb1} * ${Psb1}) = α(${NP2})`;
+                let formulaA2NPText = `\\text{α(N}\\text{P}_с^\\text{B1}\\text{)} = α(${Nb1} * ${Psb1}) = α(${NP2})`;
                 hiddenFormulaCont = 'hiddenFormulaA2NP';
                 formulaCont='formulaA2NP';
                 canvasCont='canvasA2NP';
@@ -287,7 +287,7 @@ for (let elem = 0; elem < inputs.length; elem++){
                 NP3 = Number((Nb0 * Phb0).toFixed(3));
                 allValue('[NP3-calculate]', NP3)
 
-                let formulaA3NPText = `\\text{α(N}\\text{P}_ч\\text{)} = α(${Nb0} * ${Phb0}) = α(${NP3})`;
+                let formulaA3NPText = `\\text{α(N}\\text{P}_ч^\\text{B0}\\text{)} = α(${Nb0} * ${Phb0}) = α(${NP3})`;
                 hiddenFormulaCont = 'hiddenFormulaA3NP';
                 formulaCont='formulaA3NP';
                 canvasCont='canvasA3NP';
@@ -339,7 +339,7 @@ for (let elem = 0; elem < inputs.length; elem++){
                 NP4 = Number((Nb1 * Phb1).toFixed(3));
                 allValue('[NP4-calculate]', NP4)
 
-                let formulaA4NPText = `\\text{α(N}\\text{P}_ч\\text{)} = α(${Nb1} * ${Phb1}) = α(${NP4})`;
+                let formulaA4NPText = `\\text{α(N}\\text{P}_ч^\\text{B1}\\text{)} = α(${Nb1} * ${Phb1}) = α(${NP4})`;
                 hiddenFormulaCont = 'hiddenFormulaA4NP';
                 formulaCont='formulaA4NP';
                 canvasCont='canvasA4NP';
